@@ -118,20 +118,93 @@
       display: flex; align-items: flex-start; gap: 32px;
     }
 
-    /* Showcase screenshots */
+    /* Context menu screenshot (left side) */
     .showcase-img {
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-      max-height: 420px;
+      max-height: 480px;
       width: auto;
       object-fit: contain;
     }
 
-    /* Flow arrow between screenshots */
+    /* Flow arrow */
     .showcase-flow {
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; padding-top: 80px;
+      flex-shrink: 0; padding-top: 120px;
       color: var(--indigo-light); font-size: 28px;
+    }
+
+    /* Panel mockup (right side) */
+    .panel-mock {
+      width: 340px; flex-shrink: 0;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .mock-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .mock-logo { font-weight: 700; font-size: 17px; color: var(--gray-900); }
+    .mock-header-icons { display: flex; gap: 14px; }
+    .mock-header-icons svg { width: 20px; height: 20px; stroke: var(--gray-400); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .mock-tabs {
+      display: flex; border-bottom: 1px solid var(--gray-100);
+    }
+    .mock-tab {
+      flex: 1; text-align: center; padding: 12px 0; font-size: 14px; font-weight: 600;
+      color: var(--gray-400); position: relative;
+    }
+    .mock-tab.active { color: var(--indigo); }
+    .mock-tab.active::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--indigo);
+    }
+    .mock-body { padding: 24px 20px; }
+    .mock-word { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .mock-phonetic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .mock-phonetic {
+      font-family: 'Crimson Pro', Georgia, serif; font-style: italic;
+      font-size: 15px; color: var(--gray-500);
+    }
+    .mock-audio-btn {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid var(--gray-200); background: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mock-audio-btn svg { width: 14px; height: 14px; stroke: var(--gray-500); fill: none; stroke-width: 2; }
+    .mock-definition {
+      border-left: 3px solid var(--indigo-light);
+      background: rgba(99,102,241,0.04);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px; margin-bottom: 20px;
+    }
+    .mock-pos {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      color: var(--indigo); background: rgba(79,70,229,0.1);
+      padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;
+    }
+    .mock-meaning { font-size: 14px; color: var(--gray-900); line-height: 1.5; }
+    .mock-context-label {
+      font-size: 11px; font-weight: 700; color: var(--gray-400);
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .mock-context {
+      font-size: 13px; color: var(--gray-700); line-height: 1.6;
+      background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .mock-context .ctx-word {
+      background: rgba(255, 196, 0, 0.25);
+      padding: 1px 4px; border-radius: 3px;
+      border: 1px solid rgba(255, 196, 0, 0.4);
+    }
+    .mock-source { font-size: 12px; color: var(--gray-400); margin-bottom: 16px; }
+    .mock-cta-btn {
+      display: inline-block; background: var(--indigo); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 24px;
+      border-radius: 10px; border: none;
     }
 
     /* Features */
@@ -273,6 +346,7 @@
       .showcase-demo { flex-direction: column; align-items: center; }
       .showcase-flow { padding-top: 0; transform: rotate(90deg); }
       .showcase-img { max-height: 320px; max-width: 100%; }
+      .panel-mock { width: 100%; max-width: 400px; }
       .sync-inner { flex-direction: column-reverse; gap: 40px; }
       .sync-text { text-align: center; }
       .nav-links a:not(.btn):not(.btn-coming-soon) { display: none; }
@@ -316,7 +390,35 @@
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
 
-      <img src="assets/showcase-definition.png" alt="Voca-Voca definition panel showing conspicuously with context from nytimes.com" class="showcase-img">
+      <div class="panel-mock">
+        <div class="mock-header">
+          <span class="mock-logo">Vocabulary</span>
+          <div class="mock-header-icons">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </div>
+        </div>
+        <div class="mock-tabs">
+          <div class="mock-tab active">Collection</div>
+          <div class="mock-tab">Practice</div>
+        </div>
+        <div class="mock-body">
+          <div class="mock-word">conspicuously</div>
+          <div class="mock-phonetic-row">
+            <span class="mock-phonetic">/k&#601;n&#712;sp&#618;k.ju.&#601;s.li/</span>
+            <span class="mock-audio-btn"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+          </div>
+          <div class="mock-definition">
+            <span class="mock-pos">adverb</span>
+            <div class="mock-meaning">In a conspicuous manner; noticeably.</div>
+          </div>
+          <div class="mock-context-label">Context</div>
+          <div class="mock-context">Kean's team were seated <span class="ctx-word">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</div>
+          <div class="mock-source">from www.nytimes.com</div>
+          <div class="mock-cta-btn">Add to Collection</div>
+        </div>
+      </div>
     </div>
   </section>
 
