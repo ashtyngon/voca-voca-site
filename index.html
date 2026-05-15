@@ -19,6 +19,7 @@
       --gray-200: #e5e7eb;
       --gray-400: #9ca3af;
       --gray-500: #6b7280;
+      --gray-600: #4b5563;
       --gray-700: #374151;
       --gray-900: #111827;
     }
@@ -92,16 +93,106 @@
     .hero h1 span { color: var(--indigo); }
     .hero > p {
       font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 22px; color: var(--gray-500);
-      max-width: 540px; margin: 0 auto 40px; line-height: 1.5;
+      font-size: 22px; color: var(--gray-600);
+      max-width: 500px; margin: 0 auto 40px; line-height: 1.5;
     }
     .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-    /* Inline extension mockup */
-    .hero-mockup {
-      max-width: 520px; margin: 60px auto 0;
+    /* Showcase section */
+    .showcase {
+      padding: 80px 24px 100px;
+      background: var(--gray-50);
+    }
+    .showcase-header {
+      text-align: center; margin-bottom: 48px;
+    }
+    .showcase-header h2 {
+      font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .showcase-header p {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 20px; color: var(--gray-600);
+    }
+    .showcase-demo {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: flex-start; gap: 32px;
+    }
+
+    /* Article mockup (left side) */
+    .article-mock {
+      flex: 1; min-width: 0;
       background: #fff; border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .article-chrome {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; background: #f8f8f8;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .article-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .article-dot.r { background: #ff5f57; }
+    .article-dot.y { background: #ffbd2e; }
+    .article-dot.g { background: #28c840; }
+    .article-url {
+      flex: 1; margin-left: 8px; background: white;
+      border-radius: 6px; padding: 5px 12px;
+      font-size: 12px; color: var(--gray-500);
+      border: 1px solid var(--gray-200);
+    }
+    .article-body {
+      padding: 28px 24px;
+    }
+    .article-body p {
+      font-family: Georgia, 'Crimson Pro', serif;
+      font-size: 16px; line-height: 1.8; color: var(--gray-700);
+    }
+    .article-body .word-highlight {
+      background: #b3d4fc;
+      padding: 1px 2px;
+      border-radius: 2px;
+    }
+
+    /* Context menu mockup */
+    .ctx-menu {
+      display: inline-block;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 0 0.5px rgba(0,0,0,0.08);
+      padding: 4px 0;
+      margin-top: 12px;
+      min-width: 280px;
+    }
+    .ctx-item {
+      padding: 6px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px; color: var(--gray-900);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ctx-item.voca {
+      background: var(--indigo); color: white;
+      border-radius: 4px; margin: 2px 4px;
+      padding: 6px 12px;
+    }
+    .ctx-item .icon {
+      width: 16px; height: 16px; display: inline-flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .ctx-divider { height: 1px; background: var(--gray-200); margin: 4px 0; }
+    .ctx-arrow { margin-left: auto; color: var(--gray-400); font-size: 11px; }
+
+    /* Flow arrow between mockups */
+    .showcase-flow {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; padding-top: 120px;
+      color: var(--indigo-light); font-size: 28px;
+    }
+
+    /* Panel mockup (right side) */
+    .panel-mock {
+      width: 340px; flex-shrink: 0;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
       overflow: hidden;
     }
     .mock-header {
@@ -125,11 +216,11 @@
       height: 2px; background: var(--indigo);
     }
     .mock-body { padding: 24px 20px; }
-    .mock-word { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+    .mock-word { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
     .mock-phonetic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
     .mock-phonetic {
       font-family: 'Crimson Pro', Georgia, serif; font-style: italic;
-      font-size: 16px; color: var(--gray-500);
+      font-size: 15px; color: var(--gray-500);
     }
     .mock-audio-btn {
       width: 28px; height: 28px; border-radius: 50%;
@@ -148,20 +239,20 @@
       color: var(--indigo); background: rgba(79,70,229,0.1);
       padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;
     }
-    .mock-meaning { font-size: 15px; color: var(--gray-900); line-height: 1.5; margin-bottom: 8px; }
-    .mock-example {
-      font-family: 'Crimson Pro', Georgia, serif; font-style: italic;
-      font-size: 14px; color: var(--gray-500); padding-left: 12px;
-      border-left: 2px solid var(--gray-200);
-    }
+    .mock-meaning { font-size: 14px; color: var(--gray-900); line-height: 1.5; margin-bottom: 0; }
     .mock-context-label {
       font-size: 11px; font-weight: 700; color: var(--gray-400);
       letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
     }
     .mock-context {
-      font-size: 14px; color: var(--gray-700); line-height: 1.6;
+      font-size: 13px; color: var(--gray-700); line-height: 1.6;
       background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
       margin-bottom: 10px;
+    }
+    .mock-context .ctx-word {
+      background: rgba(255, 196, 0, 0.25);
+      padding: 1px 4px; border-radius: 3px;
+      border: 1px solid rgba(255, 196, 0, 0.4);
     }
     .mock-source { font-size: 12px; color: var(--gray-400); margin-bottom: 16px; }
     .mock-cta-btn {
@@ -177,7 +268,7 @@
       font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
     }
     .section-header p {
-      font-family: 'Crimson Pro', Georgia, serif; font-size: 20px; color: var(--gray-500);
+      font-family: 'Crimson Pro', Georgia, serif; font-size: 20px; color: var(--gray-600);
     }
     .features-grid {
       max-width: 1100px; margin: 0 auto;
@@ -199,7 +290,7 @@
     .feature-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
     .feature-card p {
       font-family: 'Crimson Pro', Georgia, serif; font-size: 17px;
-      color: var(--gray-500); line-height: 1.6;
+      color: var(--gray-600); line-height: 1.6;
     }
 
     /* Habit section */
@@ -215,7 +306,7 @@
     }
     .habit-inner > p {
       font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 20px; color: var(--gray-500); line-height: 1.6;
+      font-size: 20px; color: var(--gray-600); line-height: 1.6;
       margin-bottom: 48px;
     }
     .habit-steps {
@@ -233,12 +324,12 @@
     .habit-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
     .habit-step p {
       font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 16px; color: var(--gray-500); line-height: 1.5;
+      font-size: 16px; color: var(--gray-600); line-height: 1.5;
     }
     .habit-science {
       margin-top: 40px;
       font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 16px; color: var(--gray-500); line-height: 1.6;
+      font-size: 16px; color: var(--gray-600); line-height: 1.6;
     }
     .habit-science a { color: var(--indigo); text-decoration: underline; }
 
@@ -252,7 +343,7 @@
     .sync-text h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
     .sync-text p {
       font-family: 'Crimson Pro', Georgia, serif; font-size: 19px;
-      color: var(--gray-500); line-height: 1.6; margin-bottom: 32px;
+      color: var(--gray-600); line-height: 1.6; margin-bottom: 32px;
     }
     .sync-phone {
       flex-shrink: 0; width: 280px; height: 580px;
@@ -306,12 +397,15 @@
 
     /* Responsive */
     @media (max-width: 768px) {
+      .showcase-demo { flex-direction: column; align-items: center; }
+      .showcase-flow { padding-top: 0; transform: rotate(90deg); }
+      .panel-mock { width: 100%; max-width: 400px; }
+      .article-mock { width: 100%; }
       .sync-inner { flex-direction: column-reverse; gap: 40px; }
       .sync-text { text-align: center; }
       .nav-links a:not(.btn):not(.btn-coming-soon) { display: none; }
       .features-grid { grid-template-columns: 1fr; }
       .habit-steps { flex-direction: column; }
-      .hero-mockup { margin-left: 16px; margin-right: 16px; }
     }
   </style>
 </head>
@@ -332,47 +426,82 @@
   <section class="hero">
     <div class="hero-badge">Chrome extension + iOS app</div>
     <h1>Look up a word. <span>Remember it forever.</span></h1>
-    <p>Highlight any word while you read online. Get the definition instantly, save it, and lock it into long-term memory with daily 5-minute practice sessions.</p>
+    <p>Get instant definitions while you read. Save words and build lasting vocabulary with spaced repetition.</p>
     <div class="hero-buttons">
       <span class="btn btn-coming-soon">Coming Soon</span>
     </div>
+  </section>
 
-    <div class="hero-mockup">
-      <div class="mock-header">
-        <span class="mock-logo">Vocabulary</span>
-        <div class="mock-header-icons">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+  <section class="showcase">
+    <div class="showcase-header">
+      <h2>Highlight Any Word</h2>
+      <p>Instant definitions while you browse</p>
+    </div>
+    <div class="showcase-demo">
+      <div class="article-mock">
+        <div class="article-chrome">
+          <span class="article-dot r"></span>
+          <span class="article-dot y"></span>
+          <span class="article-dot g"></span>
+          <span class="article-url">www.nytimes.com</span>
+        </div>
+        <div class="article-body">
+          <p>Afterward, his familiar explanation about condition and interview. Kean's team were seated <span class="word-highlight">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</p>
+
+          <div class="ctx-menu">
+            <div class="ctx-item" style="color: var(--gray-500);">Look Up "conspicuously"</div>
+            <div class="ctx-divider"></div>
+            <div class="ctx-item">Copy</div>
+            <div class="ctx-item">Search Google for "conspicuously"</div>
+            <div class="ctx-divider"></div>
+            <div class="ctx-item voca">
+              <span class="icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+              Look up "conspicuously"
+            </div>
+          </div>
         </div>
       </div>
-      <div class="mock-tabs">
-        <div class="mock-tab active">Collection</div>
-        <div class="mock-tab">Practice</div>
+
+      <div class="showcase-flow">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
-      <div class="mock-body">
-        <div class="mock-word">ephemeral</div>
-        <div class="mock-phonetic-row">
-          <span class="mock-phonetic">/&#618;&#712;f&#603;m.&#601;r.&#601;l/</span>
-          <span class="mock-audio-btn"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+
+      <div class="panel-mock">
+        <div class="mock-header">
+          <span class="mock-logo">Vocabulary</span>
+          <div class="mock-header-icons">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </div>
         </div>
-        <div class="mock-definition">
-          <span class="mock-pos">adjective</span>
-          <div class="mock-meaning">Lasting for a very short time; transient.</div>
-          <div class="mock-example">"the ephemeral joys of childhood"</div>
+        <div class="mock-tabs">
+          <div class="mock-tab active">Collection</div>
+          <div class="mock-tab">Practice</div>
         </div>
-        <div class="mock-context-label">Context</div>
-        <div class="mock-context">The nature of language is inherently ephemeral — words rise and fall in usage across generations, shaped by culture and social change.</div>
-        <div class="mock-source">en.wikipedia.org/wiki/Ephemeral</div>
-        <div class="mock-cta-btn">Add to Collection</div>
+        <div class="mock-body">
+          <div class="mock-word">conspicuously</div>
+          <div class="mock-phonetic-row">
+            <span class="mock-phonetic">/k&#601;n&#712;sp&#618;k.ju.&#601;s.li/</span>
+            <span class="mock-audio-btn"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
+          </div>
+          <div class="mock-definition">
+            <span class="mock-pos">adverb</span>
+            <div class="mock-meaning">In a conspicuous manner; noticeably.</div>
+          </div>
+          <div class="mock-context-label">Context</div>
+          <div class="mock-context">Kean's team were seated <span class="ctx-word">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</div>
+          <div class="mock-source">from www.nytimes.com</div>
+          <div class="mock-cta-btn">Add to Collection</div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="features" id="features">
     <div class="section-header">
-      <h2>From curiosity to mastery</h2>
-      <p>Every unfamiliar word is a chance to learn — here's how Voca-Voca helps</p>
+      <h2>Everything you need to learn new words</h2>
+      <p>From the first click to long-term memory</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
@@ -380,42 +509,42 @@
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <h3>Instant Lookup</h3>
-        <p>Highlight any word on any webpage. Definition, pronunciation, and examples appear in a sidebar — you never leave the page you're reading.</p>
+        <p>Highlight a word, get the definition. Right in Chrome's side panel — no tab-switching needed.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
         </div>
         <h3>Saved with Context</h3>
-        <p>Each word is saved alongside the sentence where you found it and the source URL. Months later, you'll remember exactly where you learned it.</p>
+        <p>Every word is saved with the sentence where you found it. You'll always remember where you learned it.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <h3>Spaced Repetition</h3>
-        <p>A proven algorithm shows you each word right before you'd forget it. You practice less, but remember more — that's the science of spacing.</p>
+        <p>A smart algorithm quizzes you right before you'd forget. Less studying, better retention.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
         </div>
         <h3>Audio Pronunciation</h3>
-        <p>Hear every word spoken aloud with auto-play. When you know how a word sounds, you're far more likely to use it in conversation.</p>
+        <p>Hear every word spoken aloud. When you know how it sounds, you're far more likely to use it.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <h3>Practice in Your Browser</h3>
-        <p>Open the side panel and run a flashcard session during a coffee break. No app to switch to — spaced repetition lives right where you work.</p>
+        <p>Run a quick flashcard session during a coffee break — right in Chrome's side panel.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
         </div>
         <h3>Cloud Sync</h3>
-        <p>Sign in with Google and everything — words, progress, streaks — syncs between Chrome and the iOS app in real time.</p>
+        <p>Sign in with Google. Your words, progress, and streaks sync between Chrome and iOS automatically.</p>
       </div>
     </div>
   </section>
@@ -423,28 +552,28 @@
   <section class="habit" id="habit">
     <div class="habit-inner">
       <h2>5 minutes a day changes everything</h2>
-      <p>Research shows that short, daily spaced-repetition sessions beat hour-long cramming by a wide margin. The key isn't how long you study — it's how consistently you return.</p>
+      <p>Short daily sessions beat hour-long cramming. It's not about how long you study — it's about coming back every day.</p>
 
       <div class="habit-steps">
         <div class="habit-step">
           <span class="habit-step-num">While you read</span>
           <h3>Collect words naturally</h3>
-          <p>Whenever you hit an unfamiliar word in an article, highlight it. Voca-Voca saves the definition and the sentence — zero friction.</p>
+          <p>Hit a new word? Highlight it. Definition and sentence are saved automatically.</p>
         </div>
         <div class="habit-step">
           <span class="habit-step-num">5 min / day</span>
-          <h3>Practice right in Chrome</h3>
-          <p>Open the side panel during a break. Flashcards appear for words you're about to forget. Rate yourself and move on — done in minutes.</p>
+          <h3>Practice in Chrome</h3>
+          <p>Open the side panel on a break. Review words you're about to forget. Done in minutes.</p>
         </div>
         <div class="habit-step">
           <span class="habit-step-num">Over time</span>
           <h3>Recognize, recall, use</h3>
-          <p>Words move from "seen once" to permanent memory. You'll start noticing them in conversation and using them without thinking.</p>
+          <p>Words move from "seen once" to permanent memory. You'll start using them without thinking.</p>
         </div>
       </div>
 
       <p class="habit-science">
-        Spaced repetition is backed by over a century of cognitive science, from Ebbinghaus's forgetting curve (1885) to modern research confirming that distributed practice produces <a href="https://doi.org/10.1177/2372732215624708" target="_blank" rel="noopener">stronger, longer-lasting retention</a> than massed study.
+        Built on over a century of cognitive science — from Ebbinghaus's forgetting curve to modern research confirming that <a href="https://doi.org/10.1177/2372732215624708" target="_blank" rel="noopener">spaced practice produces stronger, longer-lasting retention</a>.
       </p>
     </div>
   </section>
@@ -453,7 +582,7 @@
     <div class="sync-inner">
       <div class="sync-text">
         <h2>Take your words with you</h2>
-        <p>Collect words on your laptop while reading articles or research. Then practice on your phone — on the train, waiting in line, wherever you have a few minutes. Your collection and progress sync automatically.</p>
+        <p>Collect words on your laptop. Practice on your phone. Everything syncs automatically.</p>
         <span class="btn btn-coming-soon">iOS App — Coming Soon</span>
       </div>
       <div class="sync-phone">
@@ -473,7 +602,7 @@
 
   <footer>
     <div class="footer-links">
-      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
       <a href="mailto:support@voca-voca.app">Contact</a>
     </div>
     <p>&copy; 2026 Voca-Voca. All rights reserved.</p>
