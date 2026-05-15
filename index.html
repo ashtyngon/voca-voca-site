@@ -234,6 +234,7 @@
       stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     }
     .feature-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .controller-illustration { width: 100%; max-width: 200px; margin: 20px auto 0; display: block; }
     .feature-card p {
       font-family: 'Crimson Pro', Georgia, serif; font-size: 17px;
       color: var(--gray-600); line-height: 1.6;
@@ -470,12 +471,38 @@
         <h3>Cloud Sync</h3>
         <p>Sign in with Google. Your words, progress, and streaks sync between Chrome and iOS automatically.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card controller-card">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="10" r="1"/><circle cx="17" cy="12" r="1"/><circle cx="15" cy="14" r="1"/></svg>
         </div>
-        <h3>Controller Support</h3>
-        <p>Pair a Bluetooth gamepad. Flip cards, rate answers, and replay audio without touching the keyboard.</p>
+        <h3>8BitDo Zero 2</h3>
+        <p>Pair the pocket-sized Bluetooth controller. Flip cards, rate answers, and navigate practice entirely hands-free. Works with any standard gamepad.</p>
+        <svg class="controller-illustration" viewBox="0 0 240 110" aria-label="8BitDo Zero 2 controller illustration">
+          <defs>
+            <filter id="cs" x="-4%" y="-4%" width="108%" height="116%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.08"/></filter>
+          </defs>
+          <rect x="10" y="10" width="220" height="82" rx="41" fill="#F472B6" filter="url(#cs)"/>
+          <rect x="48" y="5" width="32" height="9" rx="4" fill="#eee"/>
+          <rect x="160" y="5" width="32" height="9" rx="4" fill="#eee"/>
+          <rect x="46" y="36" width="36" height="13" rx="3" fill="white"/>
+          <rect x="57" y="25" width="14" height="36" rx="3" fill="white"/>
+          <rect x="59" y="38" width="10" height="9" rx="1" fill="#e5e5e5"/>
+          <polygon points="50,42 55,39 55,45" fill="#ccc"/>
+          <polygon points="78,42 73,39 73,45" fill="#ccc"/>
+          <polygon points="64,29 61,34 67,34" fill="#ccc"/>
+          <polygon points="64,57 61,52 67,52" fill="#ccc"/>
+          <circle cx="178" cy="30" r="7" fill="white"/><circle cx="164" cy="44" r="7" fill="white"/>
+          <circle cx="192" cy="44" r="7" fill="white"/><circle cx="178" cy="58" r="7" fill="white"/>
+          <text x="178" y="34" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">X</text>
+          <text x="164" y="48" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">Y</text>
+          <text x="192" y="48" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">A</text>
+          <text x="178" y="62" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">B</text>
+          <circle cx="110" cy="64" r="4.5" fill="white" opacity="0.5"/>
+          <circle cx="128" cy="64" r="4.5" fill="white" opacity="0.5"/>
+          <text x="119" y="38" font-family="system-ui,sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="700" opacity="0.9">8BitDo</text>
+          <line x1="108" y1="42" x2="130" y2="42" stroke="white" stroke-width="0.7" opacity="0.4"/>
+          <text x="119" y="53" font-family="system-ui,sans-serif" font-size="9" fill="white" text-anchor="middle" font-weight="400" opacity="0.85">zero 2</text>
+        </svg>
       </div>
     </div>
   </section>
