@@ -370,6 +370,72 @@
     }
     .sync-phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 
+    /* iOS practice mockup */
+    .ios-mock {
+      width: 100%; height: 100%; background: #f2f2f7;
+      font-family: -apple-system, 'SF Pro', 'Helvetica Neue', sans-serif;
+      padding: 58px 18px 0; overflow: hidden;
+    }
+    .ios-title { font-size: 28px; font-weight: 700; margin-bottom: 14px; color: #000; }
+    .ios-stats {
+      display: flex; gap: 8px; margin-bottom: 14px;
+    }
+    .ios-stat {
+      flex: 1; text-align: center; padding: 10px 4px; border-radius: 12px;
+    }
+    .ios-stat-num { font-size: 22px; font-weight: 700; }
+    .ios-stat-label { font-size: 11px; color: #8e8e93; margin-top: 2px; }
+    .ios-stat.due { background: #fff2f2; }
+    .ios-stat.due .ios-stat-num { color: #ff3b30; }
+    .ios-stat.learning { background: #fff8f0; }
+    .ios-stat.learning .ios-stat-num { color: #ff9500; }
+    .ios-stat.mastered { background: #f0faf0; }
+    .ios-stat.mastered .ios-stat-num { color: #34c759; }
+    .ios-stat.streak { background: #f0f5f0; }
+    .ios-stat.streak .ios-stat-num { color: #666; }
+    .ios-card {
+      background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px;
+    }
+    .ios-retention-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 15px; font-weight: 600; margin-bottom: 6px;
+    }
+    .ios-retention-pct { color: #34c759; }
+    .ios-retention-bar {
+      height: 6px; background: #e5e5ea; border-radius: 3px; overflow: hidden;
+    }
+    .ios-retention-fill { height: 100%; background: #34c759; border-radius: 3px; }
+    .ios-retention-sub { font-size: 12px; color: #8e8e93; margin-top: 4px; }
+    .ios-setting-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; font-size: 15px;
+    }
+    .ios-setting-row + .ios-setting-row { border-top: 0.5px solid #e5e5ea; }
+    .ios-setting-val { color: #007aff; font-size: 15px; }
+    .ios-toggle {
+      width: 42px; height: 26px; background: #34c759; border-radius: 13px;
+      position: relative;
+    }
+    .ios-toggle::after {
+      content: ''; position: absolute; right: 2px; top: 2px;
+      width: 22px; height: 22px; background: white; border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .ios-practice-btn {
+      width: 100%; padding: 16px; background: #007aff; color: white;
+      font-size: 17px; font-weight: 600; border: none; border-radius: 14px;
+      text-align: center; margin-bottom: 16px;
+    }
+    .ios-tab-bar {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      display: flex; justify-content: center; gap: 48px;
+      padding: 10px 0 28px; background: #f2f2f7;
+      border-top: 0.5px solid #d1d1d6;
+    }
+    .ios-tab { text-align: center; font-size: 10px; color: #8e8e93; }
+    .ios-tab.active { color: #007aff; }
+    .ios-tab-icon { font-size: 20px; margin-bottom: 2px; }
+
     /* CTA */
     .cta {
       padding: 100px 24px; text-align: center;
@@ -588,7 +654,32 @@
       <div class="sync-phone">
         <div class="sync-phone-screen">
           <div class="sync-phone-island"></div>
-          <img src="assets/ios-app-screenshot.png" alt="Voca-Voca iOS App">
+          <div class="ios-mock">
+            <div class="ios-title">Practice</div>
+            <div class="ios-stats">
+              <div class="ios-stat due"><div class="ios-stat-num">12</div><div class="ios-stat-label">Due</div></div>
+              <div class="ios-stat learning"><div class="ios-stat-num">34</div><div class="ios-stat-label">Learning</div></div>
+              <div class="ios-stat mastered"><div class="ios-stat-num">47</div><div class="ios-stat-label">Mastered</div></div>
+              <div class="ios-stat streak"><div class="ios-stat-num">7</div><div class="ios-stat-label">Streak</div></div>
+            </div>
+            <div class="ios-card">
+              <div class="ios-retention-row"><span>7-Day Retention</span><span class="ios-retention-pct">94%</span></div>
+              <div class="ios-retention-bar"><div class="ios-retention-fill" style="width:94%"></div></div>
+              <div class="ios-retention-sub">31/33 correct in last 7 days</div>
+            </div>
+            <div class="ios-card">
+              <div class="ios-setting-row"><span>Duration</span><span class="ios-setting-val">5 min</span></div>
+              <div class="ios-setting-row"><span>New cards limit</span><span class="ios-setting-val">10</span></div>
+              <div class="ios-setting-row"><span>Auto-play audio</span><div class="ios-toggle"></div></div>
+              <div class="ios-setting-row"><span>Show context</span><div class="ios-toggle"></div></div>
+            </div>
+            <div class="ios-practice-btn">Start Practice</div>
+            <div class="ios-tab-bar">
+              <div class="ios-tab active"><div class="ios-tab-icon">&#x1F9E0;</div>Practice</div>
+              <div class="ios-tab"><div class="ios-tab-icon">&#x1F4CA;</div>Collection</div>
+              <div class="ios-tab"><div class="ios-tab-icon">&#x2699;&#xFE0F;</div>Settings</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
