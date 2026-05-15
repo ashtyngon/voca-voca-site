@@ -118,147 +118,20 @@
       display: flex; align-items: flex-start; gap: 32px;
     }
 
-    /* Article mockup (left side) */
-    .article-mock {
-      flex: 1; min-width: 0;
-      background: #fff; border-radius: 16px;
+    /* Showcase screenshots */
+    .showcase-img {
+      border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-      overflow: hidden;
-    }
-    .article-chrome {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 16px; background: #f8f8f8;
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .article-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .article-dot.r { background: #ff5f57; }
-    .article-dot.y { background: #ffbd2e; }
-    .article-dot.g { background: #28c840; }
-    .article-url {
-      flex: 1; margin-left: 8px; background: white;
-      border-radius: 6px; padding: 5px 12px;
-      font-size: 12px; color: var(--gray-500);
-      border: 1px solid var(--gray-200);
-    }
-    .article-body {
-      padding: 28px 24px;
-    }
-    .article-body p {
-      font-family: Georgia, 'Crimson Pro', serif;
-      font-size: 16px; line-height: 1.8; color: var(--gray-700);
-    }
-    .article-body .word-highlight {
-      background: #b3d4fc;
-      padding: 1px 2px;
-      border-radius: 2px;
+      max-height: 420px;
+      width: auto;
+      object-fit: contain;
     }
 
-    /* Context menu mockup */
-    .ctx-menu {
-      display: inline-block;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 0 0.5px rgba(0,0,0,0.08);
-      padding: 4px 0;
-      margin-top: 12px;
-      min-width: 280px;
-    }
-    .ctx-item {
-      padding: 6px 16px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 13px; color: var(--gray-900);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .ctx-item.voca {
-      background: var(--indigo); color: white;
-      border-radius: 4px; margin: 2px 4px;
-      padding: 6px 12px;
-    }
-    .ctx-item .icon {
-      width: 16px; height: 16px; display: inline-flex; align-items: center;
-      justify-content: center; flex-shrink: 0;
-    }
-    .ctx-divider { height: 1px; background: var(--gray-200); margin: 4px 0; }
-    .ctx-arrow { margin-left: auto; color: var(--gray-400); font-size: 11px; }
-
-    /* Flow arrow between mockups */
+    /* Flow arrow between screenshots */
     .showcase-flow {
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; padding-top: 120px;
+      flex-shrink: 0; padding-top: 80px;
       color: var(--indigo-light); font-size: 28px;
-    }
-
-    /* Panel mockup (right side) */
-    .panel-mock {
-      width: 340px; flex-shrink: 0;
-      background: #fff; border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-      overflow: hidden;
-    }
-    .mock-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--gray-100);
-    }
-    .mock-logo { font-weight: 700; font-size: 17px; color: var(--gray-900); }
-    .mock-header-icons { display: flex; gap: 14px; }
-    .mock-header-icons svg { width: 20px; height: 20px; stroke: var(--gray-400); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .mock-tabs {
-      display: flex; border-bottom: 1px solid var(--gray-100);
-    }
-    .mock-tab {
-      flex: 1; text-align: center; padding: 12px 0; font-size: 14px; font-weight: 600;
-      color: var(--gray-400); position: relative;
-    }
-    .mock-tab.active { color: var(--indigo); }
-    .mock-tab.active::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; background: var(--indigo);
-    }
-    .mock-body { padding: 24px 20px; }
-    .mock-word { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
-    .mock-phonetic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-    .mock-phonetic {
-      font-family: 'Crimson Pro', Georgia, serif; font-style: italic;
-      font-size: 15px; color: var(--gray-500);
-    }
-    .mock-audio-btn {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1.5px solid var(--gray-200); background: none;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-audio-btn svg { width: 14px; height: 14px; stroke: var(--gray-500); fill: none; stroke-width: 2; }
-    .mock-definition {
-      border-left: 3px solid var(--indigo-light);
-      background: rgba(99,102,241,0.04);
-      border-radius: 0 12px 12px 0;
-      padding: 16px 18px; margin-bottom: 20px;
-    }
-    .mock-pos {
-      display: inline-block; font-size: 12px; font-weight: 600;
-      color: var(--indigo); background: rgba(79,70,229,0.1);
-      padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;
-    }
-    .mock-meaning { font-size: 14px; color: var(--gray-900); line-height: 1.5; margin-bottom: 0; }
-    .mock-context-label {
-      font-size: 11px; font-weight: 700; color: var(--gray-400);
-      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
-    }
-    .mock-context {
-      font-size: 13px; color: var(--gray-700); line-height: 1.6;
-      background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
-      margin-bottom: 10px;
-    }
-    .mock-context .ctx-word {
-      background: rgba(255, 196, 0, 0.25);
-      padding: 1px 4px; border-radius: 3px;
-      border: 1px solid rgba(255, 196, 0, 0.4);
-    }
-    .mock-source { font-size: 12px; color: var(--gray-400); margin-bottom: 16px; }
-    .mock-cta-btn {
-      display: inline-block; background: var(--indigo); color: #fff;
-      font-size: 14px; font-weight: 600; padding: 10px 24px;
-      border-radius: 10px; border: none;
     }
 
     /* Features */
@@ -465,8 +338,7 @@
     @media (max-width: 768px) {
       .showcase-demo { flex-direction: column; align-items: center; }
       .showcase-flow { padding-top: 0; transform: rotate(90deg); }
-      .panel-mock { width: 100%; max-width: 400px; }
-      .article-mock { width: 100%; }
+      .showcase-img { max-height: 320px; max-width: 100%; }
       .sync-inner { flex-direction: column-reverse; gap: 40px; }
       .sync-text { text-align: center; }
       .nav-links a:not(.btn):not(.btn-coming-soon) { display: none; }
@@ -504,63 +376,13 @@
       <p>Instant definitions while you browse</p>
     </div>
     <div class="showcase-demo">
-      <div class="article-mock">
-        <div class="article-chrome">
-          <span class="article-dot r"></span>
-          <span class="article-dot y"></span>
-          <span class="article-dot g"></span>
-          <span class="article-url">www.nytimes.com</span>
-        </div>
-        <div class="article-body">
-          <p>Afterward, his familiar explanation about condition and interview. Kean's team were seated <span class="word-highlight">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</p>
-
-          <div class="ctx-menu">
-            <div class="ctx-item" style="color: var(--gray-500);">Look Up "conspicuously"</div>
-            <div class="ctx-divider"></div>
-            <div class="ctx-item">Copy</div>
-            <div class="ctx-item">Search Google for "conspicuously"</div>
-            <div class="ctx-divider"></div>
-            <div class="ctx-item voca">
-              <span class="icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
-              Look up "conspicuously"
-            </div>
-          </div>
-        </div>
-      </div>
+      <img src="assets/showcase-context-menu.png" alt="Right-click context menu showing Look up conspicuously option" class="showcase-img">
 
       <div class="showcase-flow">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
 
-      <div class="panel-mock">
-        <div class="mock-header">
-          <span class="mock-logo">Vocabulary</span>
-          <div class="mock-header-icons">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-          </div>
-        </div>
-        <div class="mock-tabs">
-          <div class="mock-tab active">Collection</div>
-          <div class="mock-tab">Practice</div>
-        </div>
-        <div class="mock-body">
-          <div class="mock-word">conspicuously</div>
-          <div class="mock-phonetic-row">
-            <span class="mock-phonetic">/k&#601;n&#712;sp&#618;k.ju.&#601;s.li/</span>
-            <span class="mock-audio-btn"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
-          </div>
-          <div class="mock-definition">
-            <span class="mock-pos">adverb</span>
-            <div class="mock-meaning">In a conspicuous manner; noticeably.</div>
-          </div>
-          <div class="mock-context-label">Context</div>
-          <div class="mock-context">Kean's team were seated <span class="ctx-word">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</div>
-          <div class="mock-source">from www.nytimes.com</div>
-          <div class="mock-cta-btn">Add to Collection</div>
-        </div>
-      </div>
+      <img src="assets/showcase-definition.png" alt="Voca-Voca definition panel showing conspicuously with context from nytimes.com" class="showcase-img">
     </div>
   </section>
 
