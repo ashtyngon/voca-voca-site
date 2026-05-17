@@ -1,578 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voca-Voca — Learn Vocabulary While You Read</title>
+  <meta charset="utf-8">
+  <title>Voca-Voca — Look up a word. Remember it forever.</title>
   <meta name="description" content="Highlight any word, get instant definitions, and memorize with spaced repetition. Chrome extension + iOS app with cloud sync.">
-  <link rel="icon" type="image/png" href="assets/icons/icon48.png">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;1,400;1,500&display=swap">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --indigo: #4f46e5;
-      --indigo-light: #6366f1;
-      --indigo-dark: #3730a3;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-400: #9ca3af;
-      --gray-500: #6b7280;
-      --gray-600: #4b5563;
-      --gray-700: #374151;
-      --gray-900: #111827;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Bricolage Grotesque', -apple-system, sans-serif;
-      color: var(--gray-900);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Nav */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto; padding: 16px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo { font-weight: 700; font-size: 22px; color: var(--indigo); text-decoration: none; }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { font-size: 15px; font-weight: 500; color: var(--gray-700); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--indigo); }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 28px; border-radius: 12px;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 600; font-size: 16px; text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--indigo); color: #fff;
-      box-shadow: 0 4px 14px rgba(79,70,229,0.35);
-    }
-    .btn-primary:hover {
-      background: var(--indigo-dark);
-      box-shadow: 0 6px 20px rgba(79,70,229,0.45);
-      transform: translateY(-1px);
-    }
-    .btn-coming-soon {
-      background: var(--indigo); color: #fff;
-      box-shadow: 0 4px 14px rgba(79,70,229,0.35);
-      cursor: default;
-    }
-    .btn svg { width: 20px; height: 20px; }
-
-    /* Hero */
-    .hero {
-      padding: 140px 24px 80px;
-      text-align: center;
-      background: linear-gradient(180deg, white 0%, var(--gray-50) 100%);
-    }
-    .hero-badge {
-      display: inline-block;
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-style: italic; font-size: 16px; color: var(--indigo);
-      background: rgba(79,70,229,0.08);
-      padding: 6px 18px; border-radius: 20px; margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(40px, 6vw, 64px); font-weight: 800;
-      letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px;
-    }
-    .hero h1 span { color: var(--indigo); }
-    .hero > p {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 22px; color: var(--gray-600);
-      max-width: 500px; margin: 0 auto 40px; line-height: 1.5;
-    }
-    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    /* Showcase section */
-    .showcase {
-      padding: 80px 24px 100px;
-      background: var(--gray-50);
-    }
-    .showcase-header {
-      text-align: center; margin-bottom: 48px;
-    }
-    .showcase-header h2 {
-      font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
-    }
-    .showcase-header p {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 20px; color: var(--gray-600);
-    }
-    .showcase-demo {
-      max-width: 960px; margin: 0 auto;
-      display: flex; align-items: flex-start; gap: 32px;
-    }
-
-    /* Context menu screenshot (left side) */
-    .showcase-img {
-      border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-      max-height: 480px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    /* Flow arrow */
-    .showcase-flow {
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; padding-top: 120px;
-      color: var(--indigo-light); font-size: 28px;
-    }
-
-    /* Panel mockup (right side) */
-    .panel-mock {
-      width: 340px; flex-shrink: 0;
-      background: #fff; border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-      overflow: hidden;
-    }
-    .mock-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--gray-100);
-    }
-    .mock-logo { font-weight: 700; font-size: 17px; color: var(--gray-900); }
-    .mock-header-icons { display: flex; gap: 14px; }
-    .mock-header-icons svg { width: 20px; height: 20px; stroke: var(--gray-400); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .mock-tabs {
-      display: flex; border-bottom: 1px solid var(--gray-100);
-    }
-    .mock-tab {
-      flex: 1; text-align: center; padding: 12px 0; font-size: 14px; font-weight: 600;
-      color: var(--gray-400); position: relative;
-    }
-    .mock-tab.active { color: var(--indigo); }
-    .mock-tab.active::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; background: var(--indigo);
-    }
-    .mock-body { padding: 24px 20px; }
-    .mock-word { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
-    .mock-phonetic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-    .mock-phonetic {
-      font-family: 'Crimson Pro', Georgia, serif; font-style: italic;
-      font-size: 15px; color: var(--gray-500);
-    }
-    .mock-audio-btn {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1.5px solid var(--gray-200); background: none;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mock-audio-btn svg { width: 14px; height: 14px; stroke: var(--gray-500); fill: none; stroke-width: 2; }
-    .mock-definition {
-      border-left: 3px solid var(--indigo-light);
-      background: rgba(99,102,241,0.04);
-      border-radius: 0 12px 12px 0;
-      padding: 16px 18px; margin-bottom: 20px;
-    }
-    .mock-pos {
-      display: inline-block; font-size: 12px; font-weight: 600;
-      color: var(--indigo); background: rgba(79,70,229,0.1);
-      padding: 3px 10px; border-radius: 12px; margin-bottom: 10px;
-    }
-    .mock-meaning { font-size: 14px; color: var(--gray-900); line-height: 1.5; }
-    .mock-context-label {
-      font-size: 11px; font-weight: 700; color: var(--gray-400);
-      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;
-    }
-    .mock-context {
-      font-size: 13px; color: var(--gray-700); line-height: 1.6;
-      background: var(--gray-50); border-radius: 10px; padding: 14px 16px;
-      margin-bottom: 10px;
-    }
-    .mock-context .ctx-word {
-      background: rgba(255, 196, 0, 0.25);
-      padding: 1px 4px; border-radius: 3px;
-      border: 1px solid rgba(255, 196, 0, 0.4);
-    }
-    .mock-source { font-size: 12px; color: var(--gray-400); margin-bottom: 16px; }
-    .mock-cta-btn {
-      display: inline-block; background: var(--indigo); color: #fff;
-      font-size: 14px; font-weight: 600; padding: 10px 24px;
-      border-radius: 10px; border: none;
-    }
-
-    /* Features */
-    .features { padding: 100px 24px; background: white; }
-    .section-header { text-align: center; margin-bottom: 64px; }
-    .section-header h2 {
-      font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
-    }
-    .section-header p {
-      font-family: 'Crimson Pro', Georgia, serif; font-size: 20px; color: var(--gray-600);
-    }
-    .features-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
-    }
-    .feature-card {
-      padding: 32px; border-radius: 16px;
-      background: var(--gray-50); border: 1px solid var(--gray-100);
-    }
-    .feature-icon {
-      width: 48px; height: 48px; background: rgba(79,70,229,0.1);
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-    }
-    .feature-icon svg {
-      width: 24px; height: 24px; stroke: var(--indigo); fill: none;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-    }
-    .feature-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-    .controller-illustration { width: 100%; max-width: 200px; margin: 20px auto 0; display: block; }
-    .feature-card p {
-      font-family: 'Crimson Pro', Georgia, serif; font-size: 17px;
-      color: var(--gray-600); line-height: 1.6;
-    }
-
-    /* Habit section */
-    .habit {
-      padding: 100px 24px;
-      background: var(--gray-50);
-    }
-    .habit-inner {
-      max-width: 800px; margin: 0 auto; text-align: center;
-    }
-    .habit-inner h2 {
-      font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;
-    }
-    .habit-inner > p {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 20px; color: var(--gray-600); line-height: 1.6;
-      margin-bottom: 48px;
-    }
-    .habit-steps {
-      display: flex; gap: 32px; text-align: left;
-    }
-    .habit-step {
-      flex: 1; padding: 28px; background: white;
-      border-radius: 16px; border: 1px solid var(--gray-200);
-    }
-    .habit-step-num {
-      font-size: 13px; font-weight: 700; color: var(--indigo);
-      background: rgba(79,70,229,0.08); display: inline-block;
-      padding: 4px 12px; border-radius: 8px; margin-bottom: 14px;
-    }
-    .habit-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-    .habit-step p {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 16px; color: var(--gray-600); line-height: 1.5;
-    }
-    .habit-science {
-      margin-top: 40px;
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 16px; color: var(--gray-600); line-height: 1.6;
-    }
-    .habit-science a { color: var(--indigo); text-decoration: underline; }
-
-    /* Sync section */
-    .sync { padding: 100px 24px; background: white; }
-    .sync-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; gap: 80px;
-    }
-    .sync-text { flex: 1; }
-    .sync-text h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
-    .sync-text p {
-      font-family: 'Crimson Pro', Georgia, serif; font-size: 19px;
-      color: var(--gray-600); line-height: 1.6; margin-bottom: 32px;
-    }
-    .sync-phone {
-      flex-shrink: 0; width: 280px; height: 580px;
-      background: #1a1a1a; border-radius: 46px; padding: 6px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.1);
-      position: relative;
-    }
-    .sync-phone::before {
-      content: ''; position: absolute; right: -2px; top: 100px;
-      width: 3px; height: 40px; background: #2a2a2a; border-radius: 0 2px 2px 0;
-    }
-    .sync-phone::after {
-      content: ''; position: absolute; left: -2px; top: 90px;
-      width: 3px; height: 28px; background: #2a2a2a; border-radius: 2px 0 0 2px;
-      box-shadow: 0 38px 0 #2a2a2a;
-    }
-    .sync-phone-screen {
-      width: 100%; height: 100%; border-radius: 40px;
-      overflow: hidden; position: relative;
-    }
-    .sync-phone-island {
-      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-      width: 72px; height: 18px; background: #000; border-radius: 20px; z-index: 2;
-    }
-    .sync-phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-
-    /* CTA */
-    .cta {
-      padding: 100px 24px; text-align: center;
-      background: linear-gradient(135deg, var(--indigo-light) 0%, var(--indigo-dark) 100%);
-      color: white;
-    }
-    .cta h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
-    .cta p {
-      font-family: 'Crimson Pro', Georgia, serif; font-size: 20px;
-      opacity: 0.85; margin-bottom: 40px;
-    }
-    .cta .btn-coming-soon {
-      background: white; color: var(--indigo);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-    }
-
-    /* Footer */
-    footer {
-      padding: 40px 24px; text-align: center;
-      background: var(--gray-900); color: var(--gray-500); font-size: 14px;
-    }
-    footer a { color: var(--gray-500); text-decoration: none; }
-    footer a:hover { color: white; }
-    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .showcase-demo { flex-direction: column; align-items: center; }
-      .showcase-flow { padding-top: 0; transform: rotate(90deg); }
-      .showcase-img { max-height: 320px; max-width: 100%; }
-      .panel-mock { width: 100%; max-width: 400px; }
-      .sync-inner { flex-direction: column-reverse; gap: 40px; }
-      .sync-text { text-align: center; }
-      .nav-links a:not(.btn):not(.btn-coming-soon) { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .habit-steps { flex-direction: column; }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon48.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon128.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="marketing.css">
 </head>
-<body>
+<body class="vv-mkt">
 
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">Voca-Voca</a>
-      <div class="nav-links">
+  <!-- ============ NAV ============ -->
+  <nav class="vv-nav">
+    <div class="vv-container vv-nav-inner">
+      <a href="#" class="vv-nav-logo">
+        <img src="assets/logo-mark-on-indigo.svg" alt="Voca-Voca">
+        <span class="wm">voca<span class="pip"></span>voca</span>
+      </a>
+      <div class="vv-nav-links">
         <a href="#features">Features</a>
-        <a href="#habit">How It Works</a>
-        <a href="#sync">iOS App</a>
-        <span class="btn-coming-soon btn" style="padding: 10px 20px; font-size: 14px;">Coming Soon</span>
+        <a href="#how">How It Works</a>
+        <a href="#ios">iOS App</a>
+        <a href="#" class="btn btn-primary btn-sm">Coming soon</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-badge">Chrome extension + iOS app</div>
-    <h1>Look up a word. <span>Remember it forever.</span></h1>
-    <p>Get instant definitions while you read. Save words and build lasting vocabulary with spaced repetition.</p>
-    <div class="hero-buttons">
-      <span class="btn btn-coming-soon">Coming Soon</span>
+  <!-- ============ HERO ============ -->
+  <header class="vv-hero">
+    <div class="vv-container">
+      <span class="vv-hero-pill">Chrome extension + iOS app</span>
+      <h1><span class="line line-1">Look up a word.</span><span class="line line-2"><span class="lit">Remember it forever<span class="pip" aria-hidden="true"></span></span></span></h1>
+      <p class="sub">Get instant definitions while you read. Save words and build lasting vocabulary with spaced repetition.</p>
+      <div class="cta">
+        <a href="#" class="btn btn-primary btn-lg">Coming soon</a>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <section class="showcase">
-    <div class="showcase-header">
-      <h2>Highlight Any Word</h2>
-      <p>Instant definitions while you browse</p>
-    </div>
-    <div class="showcase-demo">
-      <img src="assets/showcase-context-menu.png" alt="Right-click context menu showing Look up conspicuously option" class="showcase-img">
-
-      <div class="showcase-flow">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  <!-- ============ HIGHLIGHT ANY WORD ============ -->
+  <section class="vv-band">
+    <div class="vv-container">
+      <div class="vv-section-head">
+        <h2>Highlight Any Word</h2>
+        <p>Instant definitions while you browse</p>
       </div>
 
-      <div class="panel-mock">
-        <div class="mock-header">
-          <span class="mock-logo">Vocabulary</span>
-          <div class="mock-header-icons">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-          </div>
+      <div class="vv-demo-row">
+        <div class="vv-showcase left">
+          <img src="assets/showcase-context-menu.png" alt="Right-click any word to look it up">
         </div>
-        <div class="mock-tabs">
-          <div class="mock-tab active">Collection</div>
-          <div class="mock-tab">Practice</div>
+
+        <div class="vv-demo-arrow">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </div>
-        <div class="mock-body">
-          <div class="mock-word">conspicuously</div>
-          <div class="mock-phonetic-row">
-            <span class="mock-phonetic">/k&#601;n&#712;sp&#618;k.ju.&#601;s.li/</span>
-            <span class="mock-audio-btn"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
-          </div>
-          <div class="mock-definition">
-            <span class="mock-pos">adverb</span>
-            <div class="mock-meaning">In a conspicuous manner; noticeably.</div>
-          </div>
-          <div class="mock-context-label">Context</div>
-          <div class="mock-context">Kean's team were seated <span class="ctx-word">conspicuously</span> in the third row, watching as the Democrats took turns weighing in on their boss's mysterious absence.</div>
-          <div class="mock-source">from www.nytimes.com</div>
-          <div class="mock-cta-btn">Add to Collection</div>
+
+        <div class="vv-showcase right">
+          <img src="assets/showcase-definition.png" alt="Voca-Voca side panel showing the conspicuously definition">
         </div>
       </div>
     </div>
   </section>
 
-  <section class="features" id="features">
-    <div class="section-header">
-      <h2>Everything you need to learn new words</h2>
-      <p>From the first click to long-term memory</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <h3>Instant Lookup</h3>
-        <p>Highlight a word, get the definition. Right in Chrome's side panel — no tab-switching needed.</p>
+  <!-- ============ FEATURE GRID ============ -->
+  <section class="vv-section" id="features">
+    <div class="vv-container">
+      <div class="vv-section-head">
+        <h2>Everything you need to learn new words</h2>
+        <p>From the first click to long-term memory</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+
+      <div class="vv-feat-grid">
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <h3>Instant Lookup</h3>
+          <p>Highlight a word, get the definition. Right in Chrome's side panel — no tab-switching needed.</p>
         </div>
-        <h3>Saved with Context</h3>
-        <p>Every word is saved with the sentence where you found it. You'll always remember where you learned it.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></div>
+          <h3>Saved with Context</h3>
+          <p>Every word is saved with the sentence where you found it. You'll always remember where you learned it.</p>
         </div>
-        <h3>Spaced Repetition</h3>
-        <p>A smart algorithm quizzes you right before you'd forget. Less studying, better retention.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Spaced Repetition</h3>
+          <p>A smart algorithm quizzes you right before you'd forget. Less studying, better retention.</p>
         </div>
-        <h3>Audio Pronunciation</h3>
-        <p>Hear every word spoken aloud. When you know how it sounds, you're far more likely to use it.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
+          <h3>Audio Pronunciation</h3>
+          <p>Hear every word spoken aloud. When you know how it sounds, you're far more likely to use it.</p>
         </div>
-        <h3>Practice in Your Browser</h3>
-        <p>Run sessions in the side panel or go full-screen in a dedicated tab. Choose 2 to 25 minutes — whatever fits your schedule.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>Practice in Your Browser</h3>
+          <p>Run sessions in the side panel or go full-screen in a dedicated tab. Choose 2 to 25 minutes — whatever fits your schedule.</p>
         </div>
-        <h3>Spelling Mode</h3>
-        <p>Don't just recognize words — learn to write them. Type out each word letter by letter, with hints when you get stuck.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></div>
+          <h3>Spelling Mode</h3>
+          <p>Don't just recognize words — learn to write them. Type out each word letter by letter, with hints when you get stuck.</p>
         </div>
-        <h3>Cloud Sync</h3>
-        <p>Sign in with Google. Your words, progress, and streaks sync between Chrome and iOS automatically.</p>
-      </div>
-      <div class="feature-card controller-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="10" r="1"/><circle cx="17" cy="12" r="1"/><circle cx="15" cy="14" r="1"/></svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></div>
+          <h3>Cloud Sync</h3>
+          <p>Sign in with Google. Your words, progress, and streaks sync between Chrome and iOS automatically.</p>
         </div>
-        <h3>8BitDo Zero 2</h3>
-        <p>Pair the pocket-sized Bluetooth controller. Flip cards, rate answers, and navigate practice entirely hands-free. Works with any standard gamepad.</p>
-        <svg class="controller-illustration" viewBox="0 0 240 110" aria-label="8BitDo Zero 2 controller illustration">
-          <defs>
-            <filter id="cs" x="-4%" y="-4%" width="108%" height="116%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.08"/></filter>
-          </defs>
-          <rect x="10" y="10" width="220" height="82" rx="41" fill="#F472B6" filter="url(#cs)"/>
-          <rect x="48" y="5" width="32" height="9" rx="4" fill="#eee"/>
-          <rect x="160" y="5" width="32" height="9" rx="4" fill="#eee"/>
-          <rect x="46" y="36" width="36" height="13" rx="3" fill="white"/>
-          <rect x="57" y="25" width="14" height="36" rx="3" fill="white"/>
-          <rect x="59" y="38" width="10" height="9" rx="1" fill="#e5e5e5"/>
-          <polygon points="50,42 55,39 55,45" fill="#ccc"/>
-          <polygon points="78,42 73,39 73,45" fill="#ccc"/>
-          <polygon points="64,29 61,34 67,34" fill="#ccc"/>
-          <polygon points="64,57 61,52 67,52" fill="#ccc"/>
-          <circle cx="178" cy="30" r="7" fill="white"/><circle cx="164" cy="44" r="7" fill="white"/>
-          <circle cx="192" cy="44" r="7" fill="white"/><circle cx="178" cy="58" r="7" fill="white"/>
-          <text x="178" y="34" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">X</text>
-          <text x="164" y="48" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">Y</text>
-          <text x="192" y="48" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">A</text>
-          <text x="178" y="62" font-family="system-ui,sans-serif" font-size="8" fill="#aaa" text-anchor="middle" font-weight="600">B</text>
-          <circle cx="110" cy="64" r="4.5" fill="white" opacity="0.5"/>
-          <circle cx="128" cy="64" r="4.5" fill="white" opacity="0.5"/>
-          <text x="119" y="38" font-family="system-ui,sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="700" opacity="0.9">8BitDo</text>
-          <line x1="108" y1="42" x2="130" y2="42" stroke="white" stroke-width="0.7" opacity="0.4"/>
-          <text x="119" y="53" font-family="system-ui,sans-serif" font-size="9" fill="white" text-anchor="middle" font-weight="400" opacity="0.85">zero 2</text>
-        </svg>
+
+        <div class="vv-feat">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"/></svg></div>
+          <h3>8BitDo Zero 2</h3>
+          <p>Pair the pocket-sized Bluetooth controller. Flip cards, rate answers, and navigate practice entirely hands-free. Works with any standard gamepad.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section class="habit" id="habit">
-    <div class="habit-inner">
-      <h2>5 minutes a day changes everything</h2>
-      <p>Frequency matters more than duration. A few minutes each day builds stronger recall than occasional long sessions.</p>
+  <!-- ============ 5 MINUTES A DAY ============ -->
+  <section class="vv-five" id="how">
+    <div class="vv-container">
+      <div class="vv-section-head">
+        <h2>5 minutes a day change everything</h2>
+        <p>Frequency matters more than duration. A few minutes each day builds stronger recall than occasional long sessions.</p>
+      </div>
 
-      <div class="habit-steps">
-        <div class="habit-step">
-          <span class="habit-step-num">While you read</span>
+      <div class="vv-steps">
+        <div class="vv-step">
+          <span class="pill">While you read</span>
           <h3>Collect words naturally</h3>
           <p>Hit a new word? Highlight it. Definition and sentence are saved automatically.</p>
         </div>
-        <div class="habit-step">
-          <span class="habit-step-num">5 min / day</span>
+        <div class="vv-step">
+          <span class="pill">3 min / day</span>
           <h3>Practice in Chrome</h3>
           <p>Open the side panel on a break. Review words you're about to forget. Done in minutes.</p>
         </div>
-        <div class="habit-step">
-          <span class="habit-step-num">Over time</span>
+        <div class="vv-step">
+          <span class="pill">Over time</span>
           <h3>Recognize, recall, use</h3>
-          <p>Words move from "seen once" to permanent memory. You'll start using them without thinking.</p>
+          <p>Words move from "seen once" to "permanent memory." You'll start using them without thinking.</p>
         </div>
       </div>
 
-      <p class="habit-science">
-        Built on over a century of cognitive science — from Ebbinghaus's forgetting curve to modern research confirming that <a href="https://doi.org/10.1177/2372732215624708" target="_blank" rel="noopener">spaced practice produces stronger, longer-lasting retention</a>.
-      </p>
+      <p class="vv-science">Built on over a century of cognitive science — from Ebbinghaus's forgetting curve to modern research confirming that <a href="#">spaced practice produces stronger, longer-lasting retention</a>.</p>
     </div>
   </section>
 
-  <section class="sync" id="sync">
-    <div class="sync-inner">
-      <div class="sync-text">
+  <!-- ============ TAKE WITH YOU ============ -->
+  <section class="vv-takeit" id="ios" data-bg="glow" data-layout="text-left">
+    <div class="vv-container vv-takeit-inner">
+      <div class="vv-takeit-text">
         <h2>Take your words with you</h2>
         <p>Collect words on your laptop. Practice on your phone. Everything syncs automatically.</p>
-        <span class="btn btn-coming-soon">iOS App — Coming Soon</span>
+        <ul class="vv-takeit-bullets">
+          <li>
+            <span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+            Sign in with Google or Apple
+          </li>
+          <li>
+            <span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></span>
+            Sync across every device, instantly
+          </li>
+          <li>
+            <span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span>
+            Coming to the App Store soon
+          </li>
+        </ul>
       </div>
-      <div class="sync-phone">
-        <div class="sync-phone-screen">
-          <div class="sync-phone-island"></div>
-          <img src="assets/ios-app-screenshot.png" alt="Voca-Voca iOS app practice screen">
+      <div class="vv-phone-wrap">
+        <div class="vv-phone">
+          <img class="vv-phone-frame" src="assets/iphone-frame.png" alt="" aria-hidden="true">
+          <div class="vv-phone-screen">
+            <img src="assets/ios-app-screenshot.png" alt="Voca-Voca iOS app — Practice screen">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="cta" id="get">
-    <h2>Start building your vocabulary today</h2>
-    <p>Free to use. One click to add to Chrome.</p>
-    <span class="btn btn-coming-soon">Coming Soon</span>
+  <!-- ============ FINAL CTA ============ -->
+  <section class="vv-cta-band">
+    <div class="vv-container">
+      <h2>Start building your vocabulary today</h2>
+      <p>Try for free. No credit card required.</p>
+      <a href="#" class="btn btn-on-indigo btn-lg">Coming soon</a>
+    </div>
   </section>
 
-  <footer>
-    <div class="footer-links">
-      <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
-      <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>
-      <a href="mailto:support@voca-voca.app">Contact</a>
+  <!-- ============ FOOTER ============ -->
+  <footer class="vv-footer">
+    <div class="vv-container vv-footer-inner">
+      <div class="vv-footer-logo">
+        <img src="assets/logo-mark-on-indigo.svg" alt="Voca-Voca">
+        <span class="wm">voca<span class="pip"></span>voca</span>
+      </div>
+      <div class="vv-footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="mailto:hello@voca-voca.app">Contact</a>
+      </div>
+      <div class="vv-footer-copy">© 2026 Voca-Voca. All rights reserved.</div>
     </div>
-    <p>&copy; 2026 Voca-Voca. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Scroll-reveal intersection observer
+    document.addEventListener("DOMContentLoaded", () => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal-in");
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -80px 0px" });
+      document.querySelectorAll(".vv-section, .vv-band, .vv-five, .vv-takeit, .vv-cta-band")
+        .forEach((el) => obs.observe(el));
+    });
+  </script>
 
 </body>
 </html>

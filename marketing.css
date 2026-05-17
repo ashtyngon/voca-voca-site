@@ -200,7 +200,7 @@
 .vv-mock-menu { position: absolute; top: 38px; left: 110px; width: 240px; background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; box-shadow: 0 16px 36px rgba(17,24,39,0.18), 0 4px 8px rgba(17,24,39,0.10); padding: 6px 0; font-family: var(--font-sans); font-size: 13px; color: var(--gray-800); line-height: 1.2; }
 .vv-mock-menu .item { padding: 7px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .vv-mock-menu .item.hl { background: var(--indigo-600); color: #fff; font-weight: 600; }
-.vv-mock-menu .item.hl::before { content: ""; display: inline-block; width: 14px; height: 14px; background: url("../../assets/logo-mark-on-indigo.svg") center/cover; border-radius: 3px; margin-right: 4px; }
+.vv-mock-menu .item.hl::before { content: ""; display: inline-block; width: 14px; height: 14px; background: url("assets/logo-mark-on-indigo.svg") center/cover; border-radius: 3px; margin-right: 4px; }
 .vv-mock-menu hr { border: 0; border-top: 1px solid var(--gray-100); margin: 4px 0; }
 .vv-mock-menu .item .chev { color: var(--gray-400); }
 .vv-mock-menu .item.muted { color: var(--gray-500); }
