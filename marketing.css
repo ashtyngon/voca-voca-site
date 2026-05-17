@@ -51,7 +51,14 @@
 .vv-hero {
   padding: 88px 0 104px;
   text-align: center;
-  background: linear-gradient(135deg, #eef0ff 0%, #f9fafb 55%, #fef3c7 100%);
+  /* Grid lines layered over the indigo→amber wash — restores the squared
+     architectural feel from the design preview's data-pattern="grid". */
+  background-image:
+    linear-gradient(rgba(79, 70, 229, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, 0.07) 1px, transparent 1px),
+    linear-gradient(135deg, #eef0ff 0%, #f9fafb 55%, #fef3c7 100%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-repeat: repeat, repeat, no-repeat;
   position: relative;
   overflow: hidden;
 }
