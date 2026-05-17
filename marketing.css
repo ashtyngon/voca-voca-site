@@ -305,48 +305,24 @@
 .vv-takeit-bullets li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--gray-800); }
 .vv-takeit-bullets .ic { width: 24px; height: 24px; border-radius: 7px; background: var(--indigo-50); color: var(--indigo-600); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-/* Proportional phone — uses a real iPhone PNG as the bezel overlay */
+/* Proportional phone — full pre-rendered mockup (hand + iPhone + screen) */
 .vv-phone-wrap {
   position: relative;
-  width: var(--phone-w, 260px);
+  width: calc(var(--phone-w, 260px) * 1.7);  /* mockup is wider than just-the-phone, so account */
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
-.vv-phone {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 292 / 588;          /* matches iphone-frame.png */
-  filter:
-    drop-shadow(0 calc(28px * var(--phone-shadow-strength, 1)) calc(36px * var(--phone-shadow-strength, 1)) rgba(17, 24, 39, calc(0.20 * var(--phone-shadow-strength, 1))))
-    drop-shadow(0 calc(8px * var(--phone-shadow-strength, 1)) calc(14px * var(--phone-shadow-strength, 1)) rgba(17, 24, 39, calc(0.12 * var(--phone-shadow-strength, 1))));
-  transform: rotate(var(--phone-tilt, 0deg));
-  transition: transform 250ms cubic-bezier(.2,.7,.2,1);
-}
-.vv-phone-frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  user-select: none;
-}
-.vv-phone-screen {
-  position: absolute;
-  top: 2.21%;
-  left: 5.14%;
-  right: 4.79%;
-  bottom: 2.21%;
-  background: #fff;
-  border-radius: 10.5%;
-  overflow: hidden;
-  z-index: 1;
-}
-.vv-phone-screen img {
+.vv-phone-mockup {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: var(--phone-img-pos, top);
+  height: auto;
+  user-select: none;
+  transform: rotate(var(--phone-tilt, 0deg));
+  transition: transform 250ms cubic-bezier(.2,.7,.2,1);
+  filter:
+    drop-shadow(0 calc(28px * var(--phone-shadow-strength, 1)) calc(36px * var(--phone-shadow-strength, 1)) rgba(17, 24, 39, calc(0.16 * var(--phone-shadow-strength, 1))))
+    drop-shadow(0 calc(8px  * var(--phone-shadow-strength, 1)) calc(14px * var(--phone-shadow-strength, 1)) rgba(17, 24, 39, calc(0.10 * var(--phone-shadow-strength, 1))));
 }
 
 /* ============ FINAL CTA ============ */
