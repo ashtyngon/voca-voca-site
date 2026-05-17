@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Voca-Voca mark on light surface">
+  <defs>
+    <filter id="markBackShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="0.8"></feGaussianBlur>
+    </filter>
+  </defs>
+  <g filter="url(#markBackShadow)">
+    <path d="M37 36 L52.5 36 L65 76 L77.5 36 L93 36 L72.5 100 L57.5 100 Z" fill="#fcd34d"></path>
+  </g>
+  <path d="M29 28 L44.5 28 L57 68 L69.5 28 L85 28 L64.5 92 L49.5 92 Z" fill="#1f1147"></path>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Voca-Voca app icon — Echo V">
+  <defs>
+    
+    <linearGradient id="bgEcho" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6366f1"></stop>
+      <stop offset="0.55" stop-color="#5046e4"></stop>
+      <stop offset="1" stop-color="#4338ca"></stop>
+    </linearGradient>
+    
+    <radialGradient id="bgHL" cx="0.5" cy="0" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"></stop>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+    </radialGradient>
+    
+    <linearGradient id="bgEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"></stop>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.10"></stop>
+    </linearGradient>
+    
+    <filter id="backVShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"></feGaussianBlur>
+    </filter>
+  </defs>
+
+  
+  <rect x="2" y="2" width="124" height="124" rx="29" ry="29" fill="url(#bgEcho)"></rect>
+  <rect x="2" y="2" width="124" height="124" rx="29" ry="29" fill="url(#bgHL)"></rect>
+  <rect x="2.5" y="2.5" width="123" height="123" rx="28.5" ry="28.5" fill="none" stroke="url(#bgEdge)" stroke-width="1"></rect>
+
+  
+  <g filter="url(#backVShadow)">
+    <path d="M37 36 L52.5 36 L65 76 L77.5 36 L93 36 L72.5 100 L57.5 100 Z" fill="#fcd34d" opacity="0.95"></path>
+  </g>
+
+  
+  <path d="M29 28 L44.5 28 L57 68 L69.5 28 L85 28 L64.5 92 L49.5 92 Z" fill="#ffffff"></path>
+
+  
+  <path d="M29 28 L44.5 28 L45 30 L33 30 Z" fill="#000000" opacity="0.06"></path>
+</svg>
