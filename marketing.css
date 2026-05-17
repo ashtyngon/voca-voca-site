@@ -1,6 +1,7 @@
 /* Marketing site — matches the existing voca-voca landing page structure.
    Scoped under .vv-mkt */
-.vv-mkt { font-family: var(--font-sans); color: var(--gray-900); background: #fff; line-height: 1.5; font-size: calc(1rem * var(--font-scale, 1)); }
+html, body { margin: 0; padding: 0; }
+.vv-mkt { font-family: var(--font-sans); color: var(--gray-900); background: #fff; line-height: 1.5; font-size: calc(1rem * var(--font-scale, 1)); margin: 0; }
 .vv-mkt * { box-sizing: border-box; }
 .vv-mkt img { max-width: 100%; display: block; }
 .vv-mkt button { font-family: inherit; cursor: pointer; }
@@ -358,13 +359,24 @@
   .vv-demo-row { grid-template-columns: 1fr; }
   .vv-demo-arrow { transform: rotate(90deg); }
 
-  /* The hand-held iPhone mockup is ~442px wide on desktop. On mobile, cap it
-     to the viewport so it doesn't blow out section width and clip headings. */
+  /* On mobile the phone bleeds to the right viewport edge — the hand reaches
+     in from off-screen rather than floating centered. Less air, more grounded. */
   .vv-takeit .vv-phone-wrap {
     width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    display: block;            /* drop flex centering — anchor right via image margin */
   }
+  .vv-takeit .vv-phone-mockup {
+    display: block;
+    width: 80%;
+    max-width: 380px;
+    margin-left: auto;          /* push to right within column */
+    margin-right: -28px;        /* cancel .vv-container's right padding → kiss viewport edge */
+  }
+  .vv-takeit[data-layout="text-left"] .vv-takeit-inner .vv-takeit-text { order: 1; }
+  .vv-takeit[data-layout="text-left"] .vv-takeit-inner .vv-phone-wrap { order: 2; }
+  .vv-takeit-inner { gap: 32px; }
   .vv-takeit-text { max-width: 100%; }
   .vv-takeit-text > p { margin-left: auto; margin-right: auto; }
   .vv-takeit-bullets { display: inline-flex; align-items: flex-start; }
@@ -378,6 +390,14 @@
   .vv-container { padding: 0 20px; }
 
   /* Reduce section padding on small phones */
-  .vv-band, .vv-section, .vv-five, .vv-takeit { padding: 64px 0; }
+  .vv-band, .vv-section, .vv-five { padding: 64px 0; }
   .vv-cta-band { padding: 64px 0; }
+
+  /* Take-with-you: drop bottom padding so the phone-with-hand visually lands
+     directly on the indigo CTA band below (no floating-in-the-air feel). */
+  .vv-takeit { padding: 56px 0 0; }
+  .vv-takeit-inner { gap: 24px; }
+
+  /* At ≤480px the container's right padding shrinks to 20px — match it. */
+  .vv-takeit .vv-phone-mockup { margin-right: -20px; }
 }
