@@ -323,11 +323,22 @@ html, body { margin: 0; padding: 0; }
   display: flex;
   justify-content: flex-end;                 /* anchor right within the grid cell */
 }
-/* Desktop: bleed the phone past the container's right edge so the hand
-   appears to reach in from off-screen rather than floating in whitespace
-   (same visual idiom as the mobile breakpoint, just on desktop). */
+/* Desktop: bleed the phone aggressively past the right viewport edge so the
+   hand truly reaches in from off-screen rather than floating mid-page. The
+   calc puts the phone's right edge ~100px past the viewport right; clamp()
+   keeps it sane on narrow desktops. */
 .vv-takeit .vv-phone-wrap {
-  margin-right: clamp(-120px, calc(540px - 50vw), 0px);
+  margin-right: clamp(-400px, calc(420px - 50vw), 0px);
+}
+
+/* Soft-fade the bottom of the mockup so the wrist dissolves into the page
+   instead of terminating in a hard cutoff. Only the bottom ~18% fades —
+   the iPhone itself stays fully opaque. This is the design fix for the
+   "hand coming out of the air" problem: hard cutoffs read as a cropping
+   accident; a feathered edge reads as intentional vignetting. */
+.vv-takeit .vv-phone-mockup {
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
 }
 .vv-phone-mockup {
   display: block;
