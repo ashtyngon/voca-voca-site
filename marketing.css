@@ -244,7 +244,7 @@ html, body { margin: 0; padding: 0; }
 .vv-feat .gamepad { position: absolute; bottom: -10px; right: -20px; width: 120px; height: 80px; opacity: 0.95; }
 
 /* ============ 5 MINUTES ============ */
-.vv-five { background: #fff; padding: 96px 0 48px; }     /* half-bottom: tighter handoff to .vv-takeit */
+.vv-five { background: #fff; padding: 96px 0 16px; }     /* tight handoff to .vv-takeit — was 48 */
 .vv-five .vv-section-head p { max-width: 580px; margin: 0 auto; }
 .vv-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: 0 auto 32px; }
 .vv-step { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 24px; }
@@ -257,8 +257,9 @@ html, body { margin: 0; padding: 0; }
 /* ============ TAKE WITH YOU ============ */
 .vv-takeit {
   background: #fff;
-  /* half-top: pulls phone closer to the .vv-five science line */
-  padding: 48px 0 var(--takeit-pad, 96px);
+  /* Tighter top and bottom — phone section was floating in too much whitespace
+     between the science line above and the indigo CTA band below. */
+  padding: 16px 0 var(--takeit-pad, 32px);
   position: relative;
   overflow: hidden;
 }
@@ -317,10 +318,16 @@ html, body { margin: 0; padding: 0; }
 /* Proportional phone — full pre-rendered mockup (hand + iPhone + screen) */
 .vv-phone-wrap {
   position: relative;
-  width: calc(var(--phone-w, 260px) * 1.7);  /* mockup is wider than just-the-phone, so account */
+  width: calc(var(--phone-w, 260px) * 2.2);  /* mockup is wider than just-the-phone, so account; 30% bigger than original 1.7 */
   flex-shrink: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;                 /* anchor right within the grid cell */
+}
+/* Desktop: bleed the phone past the container's right edge so the hand
+   appears to reach in from off-screen rather than floating in whitespace
+   (same visual idiom as the mobile breakpoint, just on desktop). */
+.vv-takeit .vv-phone-wrap {
+  margin-right: clamp(-120px, calc(540px - 50vw), 0px);
 }
 .vv-phone-mockup {
   display: block;
