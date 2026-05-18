@@ -404,6 +404,12 @@ html, body { margin: 0; padding: 0; }
 }
 
 /* ============ Cookie consent banner ============ */
+/* Bump specificity so the `hidden` attribute actually hides the banner —
+   #vv-cookie below sets display:flex (specificity 100), which beats the
+   UA stylesheet's [hidden]{display:none} (specificity 10). Without this
+   rule, el.hidden = true does nothing and the banner shows on every load. */
+#vv-cookie[hidden] { display: none; }
+
 #vv-cookie {
   position: fixed;
   bottom: 16px; left: 50%;
