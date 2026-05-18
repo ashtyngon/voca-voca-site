@@ -244,7 +244,7 @@ html, body { margin: 0; padding: 0; }
 .vv-feat .gamepad { position: absolute; bottom: -10px; right: -20px; width: 120px; height: 80px; opacity: 0.95; }
 
 /* ============ 5 MINUTES ============ */
-.vv-five { background: #fff; padding: 96px 0; }
+.vv-five { background: #fff; padding: 96px 0 48px; }     /* half-bottom: tighter handoff to .vv-takeit */
 .vv-five .vv-section-head p { max-width: 580px; margin: 0 auto; }
 .vv-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: 0 auto 32px; }
 .vv-step { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 24px; }
@@ -257,7 +257,8 @@ html, body { margin: 0; padding: 0; }
 /* ============ TAKE WITH YOU ============ */
 .vv-takeit {
   background: #fff;
-  padding: var(--takeit-pad, 96px) 0;
+  /* half-top: pulls phone closer to the .vv-five science line */
+  padding: 48px 0 var(--takeit-pad, 96px);
   position: relative;
   overflow: hidden;
 }
@@ -452,4 +453,47 @@ html, body { margin: 0; padding: 0; }
   @keyframes vv-cookie-out-mobile { to { opacity: 0; transform: translateY(16px); } }
   .vv-cookie-msg { white-space: normal; flex: 1 1 100%; }
   #vv-cookie .btn-sm { flex: 1; }
+}
+
+/* ============ "Undergoing Apple review" status pill ============ */
+.vv-review-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  padding: 3px 9px 3px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--indigo-700);
+  background: var(--indigo-50);
+  border: 1px solid var(--indigo-100);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.vv-review-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--indigo-500);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6);
+  animation: vv-review-pulse 2.4s cubic-bezier(.4,0,.6,1) infinite;
+}
+@keyframes vv-review-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vv-review-dot { animation: none; }
+}
+
+/* On narrow screens the pill flows under the bullet text */
+@media (max-width: 480px) {
+  .vv-takeit-bullets li {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .vv-review-pill { margin-left: 0; }
 }
