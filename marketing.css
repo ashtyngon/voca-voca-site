@@ -401,3 +401,55 @@ html, body { margin: 0; padding: 0; }
   /* At ≤480px the container's right padding shrinks to 20px — match it. */
   .vv-takeit .vv-phone-mockup { margin-right: -20px; }
 }
+
+/* ============ Cookie consent banner ============ */
+#vv-cookie {
+  position: fixed;
+  bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex; align-items: center; gap: 12px;
+  max-width: calc(100vw - 32px); width: max-content;
+  padding: 10px 12px 10px 18px;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12), 0 4px 8px rgba(17, 24, 39, 0.06);
+  animation: vv-cookie-in 240ms cubic-bezier(.2,.7,.2,1);
+  font-family: var(--font-sans);
+}
+#vv-cookie.vv-cookie-out { animation: vv-cookie-out 200ms cubic-bezier(.4,0,.2,1) forwards; }
+@keyframes vv-cookie-in  { from { opacity: 0; transform: translate(-50%, 16px); } }
+@keyframes vv-cookie-out { to   { opacity: 0; transform: translate(-50%, 16px); } }
+
+.vv-cookie-msg {
+  margin: 0;
+  font-size: 13px; line-height: 1.4; color: var(--gray-700);
+  white-space: nowrap;
+}
+.vv-cookie-msg a { color: var(--indigo-600); text-decoration: underline; text-underline-offset: 2px; }
+
+#vv-cookie .btn-sm { padding: 8px 18px; font-size: 13px; }
+
+.vv-cookie-no {
+  background: transparent; border: 0; padding: 6px 4px;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+  color: var(--gray-500); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.vv-cookie-no:hover { color: var(--gray-800); }
+
+@media (max-width: 560px) {
+  #vv-cookie {
+    flex-wrap: wrap;
+    border-radius: 16px;
+    padding: 12px 14px;
+    left: 16px; right: 16px; transform: none;
+    width: auto; max-width: none;
+  }
+  #vv-cookie.vv-cookie-out { animation: vv-cookie-out-mobile 200ms forwards; }
+  @keyframes vv-cookie-in  { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes vv-cookie-out-mobile { to { opacity: 0; transform: translateY(16px); } }
+  .vv-cookie-msg { white-space: normal; flex: 1 1 100%; }
+  #vv-cookie .btn-sm { flex: 1; }
+}

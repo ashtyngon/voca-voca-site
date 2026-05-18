@@ -13,6 +13,36 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="stylesheet" href="marketing.css">
+
+  <!-- ============ Google Analytics 4 (Consent Mode v2) ============
+       Paste your GA4 Measurement ID (format: G-XXXXXXXXXX) into the
+       VV_GA_ID constant below. While the placeholder is in place, the
+       script bails out — nothing loads, no requests are made. -->
+  <script>
+    window.VV_GA_ID = "G-XXXXXXXXXX"; // <-- TODO: replace with real Measurement ID
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    // Consent Mode v2 — everything denied by default. The cookie banner
+    // updates analytics_storage to 'granted' on accept.
+    gtag('consent', 'default', {
+      ad_storage:          'denied',
+      ad_user_data:        'denied',
+      ad_personalization:  'denied',
+      analytics_storage:   'denied',
+      wait_for_update:     500
+    });
+    gtag('js', new Date());
+
+    // Only load gtag.js when a real ID is set (skip the placeholder).
+    if (/^G-[A-Z0-9]{6,}$/.test(VV_GA_ID) && !VV_GA_ID.includes('XXX')) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + VV_GA_ID;
+      document.head.appendChild(s);
+      gtag('config', VV_GA_ID, { anonymize_ip: true });
+    }
+  </script>
 </head>
 <body class="vv-mkt">
 
@@ -211,6 +241,46 @@
       <div class="vv-footer-copy">© 2026 Voca-Voca. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ============ Cookie consent banner ============ -->
+  <div id="vv-cookie" hidden role="dialog" aria-label="Cookie consent">
+    <p class="vv-cookie-msg">
+      Voca-Voca uses cookies for usage analytics. Helps us see what's working.
+      <a href="privacy-policy.html">Privacy</a>
+    </p>
+    <button id="vv-cookie-ok" class="btn btn-primary btn-sm" type="button" autofocus>OK</button>
+    <button id="vv-cookie-no" class="vv-cookie-no" type="button">Decline</button>
+  </div>
+  <script>
+    (function() {
+      const STORE = "vv-cookie-consent";   // localStorage key: "granted" | "denied"
+      const el    = document.getElementById("vv-cookie");
+      const okBtn = document.getElementById("vv-cookie-ok");
+      const noBtn = document.getElementById("vv-cookie-no");
+
+      function decide(choice) {
+        try { localStorage.setItem(STORE, choice); } catch (_) {}
+        if (window.gtag) {
+          gtag("consent", "update", { analytics_storage: choice === "granted" ? "granted" : "denied" });
+        }
+        el.classList.add("vv-cookie-out");
+        setTimeout(() => { el.hidden = true; }, 220);
+      }
+
+      let prior;
+      try { prior = localStorage.getItem(STORE); } catch (_) { prior = null; }
+
+      if (prior === "granted") {
+        if (window.gtag) gtag("consent", "update", { analytics_storage: "granted" });
+      } else if (prior !== "denied") {
+        // No decision yet — show the banner after a short paint delay.
+        requestAnimationFrame(() => { el.hidden = false; });
+      }
+
+      okBtn.addEventListener("click", () => decide("granted"));
+      noBtn.addEventListener("click", () => decide("denied"));
+    })();
+  </script>
 
   <script>
     // Scroll-reveal intersection observer
