@@ -257,13 +257,39 @@
   </div>
   <script>
     (function() {
-      const STORE = "vv-cookie-consent";   // localStorage key: "granted" | "denied"
+      const STORE = "vv-cookie-consent";   // key for both localStorage AND cookie
+      const COOKIE_MAX_AGE = 60 * 60 * 24 * 400;  // 400 days (Chrome's max for first-party cookies)
       const el    = document.getElementById("vv-cookie");
       const okBtn = document.getElementById("vv-cookie-ok");
       const noBtn = document.getElementById("vv-cookie-no");
 
-      function decide(choice) {
+      // Belt-and-suspenders persistence. Some browsers (Brave strict shields,
+      // Safari ITP, Firefox ETP-strict, "delete cookies on close" settings)
+      // wipe localStorage but keep first-party cookies, or vice versa. Write
+      // both; read whichever survives.
+      function setConsent(choice) {
         try { localStorage.setItem(STORE, choice); } catch (_) {}
+        try {
+          document.cookie = STORE + "=" + choice +
+            "; path=/; max-age=" + COOKIE_MAX_AGE +
+            "; SameSite=Lax" +
+            (location.protocol === "https:" ? "; Secure" : "");
+        } catch (_) {}
+      }
+      function getConsent() {
+        try {
+          const v = localStorage.getItem(STORE);
+          if (v === "granted" || v === "denied") return v;
+        } catch (_) {}
+        try {
+          const m = document.cookie.match(new RegExp("(?:^|; )" + STORE + "=([^;]*)"));
+          if (m && (m[1] === "granted" || m[1] === "denied")) return m[1];
+        } catch (_) {}
+        return null;
+      }
+
+      function decide(choice) {
+        setConsent(choice);
         if (window.gtag) {
           gtag("consent", "update", { analytics_storage: choice === "granted" ? "granted" : "denied" });
         }
@@ -271,13 +297,14 @@
         setTimeout(() => { el.hidden = true; }, 220);
       }
 
-      let prior;
-      try { prior = localStorage.getItem(STORE); } catch (_) { prior = null; }
+      const prior = getConsent();
 
       if (prior === "granted") {
         if (window.gtag) gtag("consent", "update", { analytics_storage: "granted" });
-      } else if (prior !== "denied") {
-        // No decision yet — show the banner after a short paint delay.
+      } else if (prior === "denied") {
+        // No-op: gtag default is already denied.
+      } else {
+        // No decision yet — show the banner after a paint.
         requestAnimationFrame(() => { el.hidden = false; });
       }
 
