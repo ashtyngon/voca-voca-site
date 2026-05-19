@@ -20,8 +20,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
-  <link rel="stylesheet" href="colors_and_type.css?v=20260518d">
-  <link rel="stylesheet" href="marketing.css?v=20260518d">
+  <link rel="stylesheet" href="colors_and_type.css?v=20260519a">
+  <link rel="stylesheet" href="marketing.css?v=20260519a">
 
   <!-- ============ Platform detection ============
        Runs synchronously before first paint so CTAs render correctly without a
@@ -44,46 +44,77 @@
     })();
   </script>
 
-  <!-- ============ Google Analytics 4 (Consent Mode v2) ============
-       GA4 property: voca-voca-48a7c
-       Stream: "Voca-Voca Marketing Site" (id 14902086458) -->
-  <script>
-    window.VV_GA_ID = "G-2H8KMMM7CF";
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    window.gtag = gtag;
-    // Consent Mode v2 — everything denied by default. The cookie banner
-    // updates analytics_storage to 'granted' on accept.
-    gtag('consent', 'default', {
-      ad_storage:          'denied',
-      ad_user_data:        'denied',
-      ad_personalization:  'denied',
-      analytics_storage:   'denied',
-      wait_for_update:     500
-    });
-    gtag('js', new Date());
+  <!-- ============ PostHog (web behavioral analytics) ============
+       Single source of truth for marketing-site behavior — replaces the
+       old GA4 setup. autocapture=true gives us pageviews, UTM/referrer
+       capture, session durations, and engagement-time out of the box.
 
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + VV_GA_ID;
-    document.head.appendChild(s);
-    gtag('config', VV_GA_ID, { anonymize_ip: true });
+       Public Project API Key — write-only, safe to embed. Cookie banner
+       toggles opt_in_capturing / opt_out_capturing. -->
+  <script>
+    window.POSTHOG_API_KEY = "phc_onrjYAez2cWCHyceY65NjvV3tpHXShsM67njpiTffnox";
+    window.POSTHOG_HOST    = "https://us.i.posthog.com";
+
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Be Fs capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Be Vs createPersonProfile Es opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Bs debug L Ie".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
+    posthog.init(window.POSTHOG_API_KEY, {
+      api_host: window.POSTHOG_HOST,
+      // autocapture handles pageviews + clicks. UTM / referrer / session
+      // duration / engagement time are all captured automatically.
+      autocapture: true,
+      capture_pageview: true,
+      disable_session_recording: true,
+      persistence: 'localStorage+cookie',
+      // Default to opted-OUT — we only opt in once the cookie banner records
+      // explicit consent. Honors the existing 'vv-cookie-consent' state set
+      // by the marketing-site banner.
+      opt_out_capturing_by_default: true,
+      loaded: function(ph) {
+        ph.register({ platform: 'web' });
+      }
+    });
+
+    // Promote prior consent from the existing cookie/localStorage flag.
+    try {
+      var ls = localStorage.getItem('vv-cookie-consent');
+      var m  = document.cookie.match(/vv-cookie-consent=([^;]+)/);
+      var v  = ls || (m && m[1]);
+      if (v === 'granted') posthog.opt_in_capturing();
+    } catch (_) {}
   </script>
 
-  <!-- Outbound-click tracking for Chrome Web Store CTAs (wired after DOM ready) -->
+  <!-- Chrome Web Store CTA clicks — explicit event so we can build the
+       paid-acquisition → install funnel without relying on autocapture
+       heuristics. -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('a[href*="chromewebstore"]').forEach((a, idx) => {
+      document.querySelectorAll('a[href*="chromewebstore"]').forEach((a) => {
         const loc = a.closest('nav') ? 'nav'
-                  : a.closest('.vv-hero') ? 'hero'
+                  : a.closest('.vv-hero') ? 'hero_section'
                   : a.closest('.vv-cta-band') ? 'final_cta'
                   : 'other';
         a.addEventListener('click', () => {
-          if (window.gtag) gtag('event', 'cta_chrome_click', {
-            link_url: a.href, link_location: loc
+          if (window.posthog) posthog.capture('cta_chrome_click', {
+            platform: 'web',
+            link_url: a.href,
+            link_location: loc
           });
         });
       });
+
+      // Hero CTA — the user's primary acquisition button. Tagged explicitly
+      // with the canonical id "#chrome-cta" so future redesigns can rename
+      // / restyle without breaking analytics joins.
+      const hero = document.getElementById('chrome-cta');
+      if (hero && window.posthog) {
+        hero.addEventListener('click', () => {
+          posthog.capture('cta_chrome_click', {
+            platform: 'web',
+            link_location: 'hero_section',
+            link_url: hero.href
+          });
+        });
+      }
     });
   </script>
 </head>
@@ -262,7 +293,7 @@
         </ul>
       </div>
       <div class="vv-phone-wrap">
-        <img class="vv-phone-mockup" src="assets/iphone-mockup-hand.png?v=20260518d" alt="Voca-Voca iOS app — Practice screen" draggable="false">
+        <img class="vv-phone-mockup" src="assets/iphone-mockup-hand.png?v=20260519a" alt="Voca-Voca iOS app — Practice screen" draggable="false">
       </div>
     </div>
   </section>
@@ -325,7 +356,7 @@
         modal.hidden = false;
         document.body.style.overflow = 'hidden';
         setTimeout(function() { emailInput.focus(); }, 50);
-        if (window.gtag) gtag('event', 'waitlist_modal_open');
+        if (window.posthog) posthog.capture('waitlist_modal_open', { platform: 'web' });
       }
       function close() {
         modal.hidden = true;
@@ -378,24 +409,24 @@
               msg.classList.add('ok');
               msg.hidden = false;
               form.reset();
-              if (window.gtag) gtag('event', 'waitlist_signup_success', { platform: platformLabel() });
+              if (window.posthog) posthog.capture('waitlist_signup_success', { platform: 'web', target_platform: platformLabel() });
             } else if (resp.data && resp.data.error === 'invalid_email') {
               msg.textContent = "That email looks off — try again?";
               msg.classList.add('err');
               msg.hidden = false;
-              if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'invalid_email' });
+              if (window.posthog) posthog.capture('waitlist_signup_error', { platform: 'web', error: 'invalid_email' });
             } else {
               msg.textContent = "Something went wrong on our end. Try again in a moment?";
               msg.classList.add('err');
               msg.hidden = false;
-              if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'server' });
+              if (window.posthog) posthog.capture('waitlist_signup_error', { platform: 'web', error: 'server' });
             }
           })
           .catch(function() {
             msg.textContent = "Couldn't reach the server. Check your connection and try again.";
             msg.classList.add('err');
             msg.hidden = false;
-            if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'network' });
+            if (window.posthog) posthog.capture('waitlist_signup_error', { platform: 'web', error: 'network' });
           })
           .then(function() {
             submitBtn.disabled = false;
@@ -449,8 +480,10 @@
 
       function decide(choice) {
         setConsent(choice);
-        if (window.gtag) {
-          gtag("consent", "update", { analytics_storage: choice === "granted" ? "granted" : "denied" });
+        // Cookie banner toggles PostHog opt-in. No GA4 consent calls — we
+        // migrated entirely off Google Analytics.
+        if (window.posthog) {
+          choice === "granted" ? posthog.opt_in_capturing() : posthog.opt_out_capturing();
         }
         el.classList.add("vv-cookie-out");
         setTimeout(() => { el.hidden = true; }, 220);
@@ -459,9 +492,9 @@
       const prior = getConsent();
 
       if (prior === "granted") {
-        if (window.gtag) gtag("consent", "update", { analytics_storage: "granted" });
+        if (window.posthog) posthog.opt_in_capturing();
       } else if (prior === "denied") {
-        // No-op: gtag default is already denied.
+        // No-op: PostHog default is opted-out (see opt_out_capturing_by_default).
       } else {
         // No decision yet — show the banner after a paint.
         requestAnimationFrame(() => { el.hidden = false; });

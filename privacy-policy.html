@@ -35,7 +35,7 @@
   <p>By installing or using Voca-Voca you agree to this Privacy Policy. If you do not agree, please uninstall the extension and discontinue use.</p>
 
   <h2>1. Data We Collect</h2>
-  <p>We collect only what is necessary to provide the core vocabulary-learning features and to understand how Voca-Voca is used in aggregate. We do not collect data for advertising, profiling, or behavioral targeting. We use Google Analytics 4 for product analytics; see <a href="#analytics">Section 5</a> for details and opt-out.</p>
+  <p>We collect only what is necessary to provide the core vocabulary-learning features and to understand how Voca-Voca is used in aggregate. We do not collect data for advertising, profiling, or behavioral targeting. We use PostHog (product analytics) and RevenueCat (subscription state of record); see <a href="#analytics">Section 5</a> for details and opt-out.</p>
 
   <table>
     <tr><th>Category</th><th>Data</th><th>Purpose</th></tr>
@@ -76,8 +76,8 @@
     <li>We do not read, collect, or store the content of web pages you visit.</li>
     <li>We do not record your browsing history or navigation behavior.</li>
     <li>We do not collect health, financial, or payment card information.</li>
-    <li>We do not use advertising cookies, third-party tracking pixels, or cross-site tracking technologies. The only cookies we set are: (i) a first-party cookie that remembers your analytics opt-in choice on this site, and (ii) the cookies Google Analytics writes when you have opted in (see <a href="#analytics">Section 5</a>).</li>
-    <li>We do not collect precise geolocation. Google Analytics may infer approximate country/region from IP address, and IP addresses are <strong>anonymized</strong> before being processed (the last octet is truncated).</li>
+    <li>We do not use advertising cookies, third-party tracking pixels, or cross-site tracking technologies. The only cookies we set are: (i) a first-party cookie that remembers your analytics opt-in choice on this site, and (ii) the cookies PostHog writes when you have opted in (see <a href="#analytics">Section 5</a>).</li>
+    <li>We do not collect precise geolocation. PostHog may infer approximate country/region from IP address.</li>
     <li>We do not collect the actual words you save. Analytics events about saved words contain only anonymous metadata (word length, language, part of speech, source domain) — never the word itself.</li>
   </ul>
 
@@ -146,10 +146,16 @@
       <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></td>
     </tr>
     <tr>
-      <td>Google Analytics 4<br><small>www.google-analytics.com</small></td>
+      <td>PostHog<br><small>us.i.posthog.com</small></td>
       <td>Anonymous event names + non-identifying metadata (no personal info, no word content). See <a href="#analytics">Section 5</a> for the full list.</td>
-      <td>Understanding aggregate product usage and improving the extension</td>
-      <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></td>
+      <td>Understanding aggregate product usage and improving the product</td>
+      <td><a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog Privacy Policy</a></td>
+    </tr>
+    <tr>
+      <td>RevenueCat<br><small>api.revenuecat.com</small></td>
+      <td>Subscription state, transaction IDs, your Firebase user ID. No card / bank details.</td>
+      <td>Source of truth for which users are on Premium and renewal lifecycle</td>
+      <td><a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat Privacy Policy</a></td>
     </tr>
     <tr>
       <td>Payment processors<br><small>(e.g., Stripe)</small></td>
@@ -162,13 +168,13 @@
   <p>No other third-party services receive your data. We do not embed advertising networks or cross-site tracking scripts.</p>
 
   <h2 id="analytics">5. Analytics</h2>
-  <p>Voca-Voca uses <strong>Google Analytics 4</strong> ("GA4") to understand aggregate usage patterns — how many people install the extension, which features they use, where they drop off, and where they convert. We use this information to prioritize improvements and to demonstrate product traction to potential partners or investors.</p>
+  <p>Voca-Voca uses <strong>PostHog</strong> to understand aggregate usage patterns — how many people install the extension, which features they use, where they drop off, and where they convert. We use this information to prioritize improvements and to demonstrate product traction to potential partners or investors.</p>
 
   <h3>Where analytics runs</h3>
   <ul>
-    <li><strong>This website (voca-voca.app)</strong> — loads the standard GA4 tag (<code>gtag.js</code>) on page view, gated by your consent choice (see "Opt-out" below).</li>
-    <li><strong>Chrome extension</strong> — sends events to GA4 via the Measurement Protocol (server-to-server style HTTPS requests) from the extension's background service worker. No third-party JavaScript is loaded inside the extension; the Chrome Web Store's Manifest V3 rules prohibit that and we comply.</li>
-    <li><strong>iOS app</strong> — once published, the iOS app will use Firebase Analytics (Google's iOS SDK that reports into the same GA4 property). This section will be effective for the iOS app once it launches.</li>
+    <li><strong>This website (voca-voca.app)</strong> — loads the PostHog JavaScript SDK from <code>us.i.posthog.com</code> on page view, gated by your consent choice (see "Opt-out" below).</li>
+    <li><strong>Chrome extension</strong> — POSTs events directly to PostHog's HTTPS capture endpoint from the extension's background service worker and side panel. No third-party JavaScript is loaded inside the extension; the Chrome Web Store's Manifest V3 rules prohibit that and we comply.</li>
+    <li><strong>iOS app</strong> — uses the PostHog Swift SDK plus the RevenueCat Swift SDK for subscription state. Both run only after the app launches and stop sending events when you sign out.</li>
   </ul>
 
   <h3>Event categories we collect</h3>
