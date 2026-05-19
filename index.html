@@ -11,8 +11,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap">
-  <link rel="stylesheet" href="colors_and_type.css?v=20260518c">
-  <link rel="stylesheet" href="marketing.css?v=20260518c">
+  <link rel="stylesheet" href="colors_and_type.css?v=20260518d">
+  <link rel="stylesheet" href="marketing.css?v=20260518d">
+
+  <!-- ============ Platform detection ============
+       Runs synchronously before first paint so CTAs render correctly without a
+       flash of the desktop "Add to Chrome" button on mobile devices. Classes
+       are added to <html> so CSS can swap CTAs deterministically. -->
+  <script>
+    (function() {
+      var ua = navigator.userAgent || '';
+      var html = document.documentElement;
+      var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var isAndroid = /Android/i.test(ua);
+      var isInstagram = /Instagram/i.test(ua);
+      var isMobile = isIOS || isAndroid || /Mobi|Mobile/i.test(ua);
+      if (isMobile)    html.classList.add('is-mobile');
+      if (isIOS)       html.classList.add('is-ios');
+      if (isAndroid)   html.classList.add('is-android');
+      if (isInstagram) html.classList.add('is-instagram');
+      if (!isMobile)   html.classList.add('is-desktop');
+    })();
+  </script>
 
   <!-- ============ Google Analytics 4 (Consent Mode v2) ============
        GA4 property: voca-voca-48a7c
@@ -70,7 +91,8 @@
         <a href="#features">Features</a>
         <a href="#how">How It Works</a>
         <a href="#ios">iOS App</a>
-        <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Add to Chrome</a>
+        <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-primary btn-sm vv-cta vv-cta-chrome">Add to Chrome</a>
+        <button type="button" class="btn btn-primary btn-sm vv-cta vv-cta-ios" data-vv-waitlist-open>Get on iOS</button>
       </div>
     </div>
   </nav>
@@ -82,7 +104,9 @@
       <h1><span class="line line-1">Look up a word.</span><span class="line line-2"><span class="lit">Remember it forever<span class="pip" aria-hidden="true"></span></span></span></h1>
       <p class="sub">Get instant definitions while you read. Save words and build lasting vocabulary with spaced repetition.</p>
       <div class="cta">
-        <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Add to Chrome — it's free</a>
+        <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-primary btn-lg vv-cta vv-cta-chrome">Add to Chrome — it's free</a>
+        <button type="button" class="btn btn-primary btn-lg vv-cta vv-cta-ios" data-vv-waitlist-open>Notify me when iOS launches</button>
+        <p class="vv-cta-helper vv-cta-ios">Chrome extension is available on desktop today.</p>
       </div>
     </div>
   </header>
@@ -229,7 +253,7 @@
         </ul>
       </div>
       <div class="vv-phone-wrap">
-        <img class="vv-phone-mockup" src="assets/iphone-mockup-hand.png?v=20260518c" alt="Voca-Voca iOS app — Practice screen" draggable="false">
+        <img class="vv-phone-mockup" src="assets/iphone-mockup-hand.png?v=20260518d" alt="Voca-Voca iOS app — Practice screen" draggable="false">
       </div>
     </div>
   </section>
@@ -239,7 +263,8 @@
     <div class="vv-container">
       <h2>Never stop learning</h2>
       <p>Try for free. No credit card required.</p>
-      <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-on-indigo btn-lg">Add to Chrome</a>
+      <a href="https://chromewebstore.google.com/detail/gphmlhfekcbmhbbkhffianonpmjhnnln" target="_blank" rel="noopener" class="btn btn-on-indigo btn-lg vv-cta vv-cta-chrome">Add to Chrome</a>
+      <button type="button" class="btn btn-on-indigo btn-lg vv-cta vv-cta-ios" data-vv-waitlist-open>Notify me when iOS launches</button>
     </div>
   </section>
 
@@ -258,6 +283,118 @@
       <div class="vv-footer-copy">© 2026 Voca-Voca. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ============ iOS pre-launch waitlist modal ============
+       Opened by any [data-vv-waitlist-open] button. Posts to the
+       waitlistSignup Cloud Function and stores in Firestore /waitlist. -->
+  <div id="vv-waitlist-modal" class="vv-modal" hidden role="dialog" aria-modal="true" aria-labelledby="vv-waitlist-title">
+    <div class="vv-modal-backdrop" data-vv-waitlist-close></div>
+    <div class="vv-modal-content">
+      <button class="vv-modal-close" type="button" data-vv-waitlist-close aria-label="Close">×</button>
+      <h3 id="vv-waitlist-title">iOS app launching soon</h3>
+      <p>The Voca-Voca iOS app is undergoing Apple's App Store review. Drop your email and we'll let you know the moment it's live.</p>
+      <form id="vv-waitlist-form" novalidate>
+        <input type="email" name="email" id="vv-waitlist-email" placeholder="you@example.com" required autocomplete="email" autocapitalize="off" spellcheck="false">
+        <button type="submit" class="btn btn-primary btn-md">Notify me</button>
+        <div class="vv-waitlist-msg" hidden aria-live="polite"></div>
+        <p class="vv-waitlist-note">We'll only email you about the iOS launch. No marketing, no third-party sharing.</p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Waitlist modal — opened by [data-vv-waitlist-open], closed by [data-vv-waitlist-close].
+    (function() {
+      var modal = document.getElementById('vv-waitlist-modal');
+      if (!modal) return;
+      var form = document.getElementById('vv-waitlist-form');
+      var emailInput = document.getElementById('vv-waitlist-email');
+      var msg = modal.querySelector('.vv-waitlist-msg');
+      var submitBtn = form.querySelector('button[type=submit]');
+
+      function open() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        setTimeout(function() { emailInput.focus(); }, 50);
+        if (window.gtag) gtag('event', 'waitlist_modal_open');
+      }
+      function close() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        msg.hidden = true;
+        msg.className = 'vv-waitlist-msg';
+      }
+      function platformLabel() {
+        var html = document.documentElement;
+        return html.classList.contains('is-ios')     ? 'ios'
+             : html.classList.contains('is-android') ? 'android'
+             : html.classList.contains('is-mobile')  ? 'mobile'
+             :                                          'desktop';
+      }
+
+      document.querySelectorAll('[data-vv-waitlist-open]').forEach(function(el) {
+        el.addEventListener('click', open);
+      });
+      document.querySelectorAll('[data-vv-waitlist-close]').forEach(function(el) {
+        el.addEventListener('click', close);
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.hidden) close();
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = emailInput.value.trim();
+        if (!email) return;
+
+        msg.hidden = true;
+        msg.className = 'vv-waitlist-msg';
+        submitBtn.disabled = true;
+        var originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('https://us-central1-voca-voca-48a7c.cloudfunctions.net/waitlistSignup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            source: 'ios-prelaunch-modal',
+            platform: platformLabel()
+          })
+        })
+          .then(function(r) { return r.json().then(function(d) { return { status: r.status, data: d }; }); })
+          .then(function(resp) {
+            if (resp.status === 200 && resp.data && resp.data.ok) {
+              msg.textContent = "You're on the list. We'll email when iOS launches.";
+              msg.classList.add('ok');
+              msg.hidden = false;
+              form.reset();
+              if (window.gtag) gtag('event', 'waitlist_signup_success', { platform: platformLabel() });
+            } else if (resp.data && resp.data.error === 'invalid_email') {
+              msg.textContent = "That email looks off — try again?";
+              msg.classList.add('err');
+              msg.hidden = false;
+              if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'invalid_email' });
+            } else {
+              msg.textContent = "Something went wrong on our end. Try again in a moment?";
+              msg.classList.add('err');
+              msg.hidden = false;
+              if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'server' });
+            }
+          })
+          .catch(function() {
+            msg.textContent = "Couldn't reach the server. Check your connection and try again.";
+            msg.classList.add('err');
+            msg.hidden = false;
+            if (window.gtag) gtag('event', 'waitlist_signup_error', { error: 'network' });
+          })
+          .then(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          });
+      });
+    })();
+  </script>
 
   <!-- ============ Cookie consent banner ============ -->
   <div id="vv-cookie" hidden role="dialog" aria-label="Cookie consent">
