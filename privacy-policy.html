@@ -29,294 +29,301 @@
 <body>
   <a href="/" class="back-link">&larr; Back to Voca-Voca</a>
   <h1>Privacy Policy</h1>
-  <p class="updated">Effective date: May 14, 2026 &middot; Last updated: May 18, 2026</p>
+  <p class="updated">Effective date: May 19, 2026 &middot; Last updated: May 19, 2026</p>
 
-  <p>Voca-Voca ("we", "our", or "the extension") is a vocabulary-learning browser extension and companion iOS app that lets you look up word definitions while reading online, save words to a personal collection, and practice with spaced repetition. This Privacy Policy explains what data we collect, why we collect it, how we store and protect it, and what rights you have over it.</p>
-  <p>By installing or using Voca-Voca you agree to this Privacy Policy. If you do not agree, please uninstall the extension and discontinue use.</p>
+  <p>Voca-Voca ("we", "our", "Voca-Voca") is a vocabulary-learning service offered as a browser extension, a website at voca-voca.app, and a companion iOS app. The service lets you save words you encounter while reading, look up their definitions, and practice them with spaced repetition. This Privacy Policy explains what personal data we collect, why we collect it, how we store it, who we share it with, and what rights you have over it.</p>
+
+  <p>By installing or using Voca-Voca you agree to this Privacy Policy. If you do not agree, please discontinue use and uninstall the application.</p>
 
   <h2>1. Data We Collect</h2>
-  <p>We collect only what is necessary to provide the core vocabulary-learning features and to understand how Voca-Voca is used in aggregate. We do not collect data for advertising, profiling, or behavioral targeting. We use PostHog (product analytics) and RevenueCat (subscription state of record); see <a href="#analytics">Section 5</a> for details and opt-out.</p>
+
+  <p>We collect only the data needed to operate the service, deliver the features you signed up for, and improve the product over time. We do not sell personal data, we do not collect data for advertising, and we do not build profiles of users for behavioral targeting.</p>
 
   <table>
     <tr><th>Category</th><th>Data</th><th>Purpose</th></tr>
     <tr>
       <td><strong>Account information</strong></td>
-      <td>Google email address, display name, and unique user ID</td>
-      <td>Authentication and identifying your account for cloud sync</td>
+      <td>Your email address, display name, and a unique account identifier issued by Firebase Authentication.</td>
+      <td>Identifying your account and enabling cloud sync.</td>
     </tr>
     <tr>
       <td><strong>Vocabulary data</strong></td>
-      <td>Words you save, their definitions, the sentence (context) in which you found them, and the source page URL</td>
-      <td>Building and displaying your personal word collection</td>
+      <td>Words you save, their definitions, the sentence in which you found them, and the source page URL.</td>
+      <td>Building and displaying your personal collection.</td>
     </tr>
     <tr>
       <td><strong>Learning data</strong></td>
-      <td>Spaced-repetition state (interval, ease factor, due date), review history, mastery level per word</td>
-      <td>Scheduling practice sessions and tracking progress</td>
+      <td>Spaced-repetition state (interval, ease factor, due date), review history, mastery level per word.</td>
+      <td>Scheduling practice sessions and tracking your progress.</td>
     </tr>
     <tr>
       <td><strong>Practice statistics</strong></td>
-      <td>Total sessions, cards reviewed, time spent, daily streak</td>
-      <td>Showing your progress and maintaining motivation</td>
+      <td>Total sessions, cards reviewed, time spent, daily streak.</td>
+      <td>Showing your progress over time.</td>
     </tr>
     <tr>
-      <td><strong>Folders</strong></td>
-      <td>Folder names and colors you create to organize words</td>
-      <td>Organizing your vocabulary collection</td>
+      <td><strong>Folders &amp; preferences</strong></td>
+      <td>Folder names and colors you create, plus settings such as theme, practice duration, and daily goal.</td>
+      <td>Organizing your collection and personalizing your experience.</td>
     </tr>
     <tr>
-      <td><strong>Preferences</strong></td>
-      <td>Extension settings such as dark mode, practice duration, daily goal</td>
-      <td>Personalizing your experience</td>
+      <td><strong>Subscription state</strong></td>
+      <td>Whether you have an active Pro subscription, the plan you chose, renewal status, and platform of purchase (Apple StoreKit, Stripe).</td>
+      <td>Granting access to paid features across your devices.</td>
+    </tr>
+    <tr>
+      <td><strong>Product analytics</strong></td>
+      <td>Anonymous interaction events (described in Section 5). No word content, no page URLs, no email addresses.</td>
+      <td>Understanding which features people use so we can prioritize improvements and fix issues.</td>
     </tr>
   </table>
 
-  <h3>Data we do NOT collect</h3>
+  <h3>Data we do not collect</h3>
   <ul>
     <li>We do not read, collect, or store the content of web pages you visit.</li>
-    <li>We do not record your browsing history or navigation behavior.</li>
-    <li>We do not collect health, financial, or payment card information.</li>
-    <li>We do not use advertising cookies, third-party tracking pixels, or cross-site tracking technologies. The only cookies we set are: (i) a first-party cookie that remembers your analytics opt-in choice on this site, and (ii) the cookies PostHog writes when you have opted in (see <a href="#analytics">Section 5</a>).</li>
-    <li>We do not collect precise geolocation. PostHog may infer approximate country/region from IP address.</li>
-    <li>We do not collect the actual words you save. Analytics events about saved words contain only anonymous metadata (word length, language, part of speech, source domain) — never the word itself.</li>
+    <li>We do not record your browsing history or general navigation behavior.</li>
+    <li>We do not collect health, financial, or payment card information &mdash; payment details go directly to the payment processor (see Section 7).</li>
+    <li>We do not collect precise geolocation. Our analytics provider may infer an approximate country or region from your IP address.</li>
+    <li>We do not use advertising cookies, third-party advertising tags, or cross-site tracking pixels.</li>
+    <li>We do not collect the words you save in product-analytics events. Where word-related events are emitted, they include only anonymous metadata (length, language, part of speech, source domain) &mdash; never the word itself.</li>
   </ul>
 
   <h2>2. How We Use Your Data</h2>
   <ul>
-    <li><strong>Providing core features</strong> — looking up definitions, saving words, running practice sessions, and displaying your progress.</li>
-    <li><strong>Cloud sync</strong> — if you sign in with Google, syncing your vocabulary, progress, and settings across your devices.</li>
-    <li><strong>Improving the product</strong> — we may use aggregated, non-identifiable usage patterns (e.g., average collection size) to improve Voca-Voca. Individual user data is never analyzed for this purpose.</li>
+    <li><strong>Operating the service</strong> &mdash; looking up definitions, saving words, running practice sessions, displaying your progress, and synchronizing your collection across the devices you sign in on.</li>
+    <li><strong>Managing your subscription</strong> &mdash; verifying that your Pro entitlement is active, processing renewals, restoring purchases on new devices.</li>
+    <li><strong>Improving the product</strong> &mdash; analyzing anonymous interaction events to identify bugs, prioritize features, and measure the effect of changes we ship.</li>
+    <li><strong>Security and compliance</strong> &mdash; detecting abuse, preventing fraud, complying with applicable law, and enforcing our Terms of Service.</li>
+    <li><strong>Communicating with you</strong> &mdash; sending operational messages such as receipts, account-deletion confirmations, or critical security notices to the email address on file. We do not send marketing email unless you have explicitly opted in.</li>
   </ul>
-  <p>We do <strong>not</strong> use your data for advertising, marketing, profiling, selling, or any purpose unrelated to the extension's vocabulary-learning functionality.</p>
+  <p>We do not use your data for advertising, third-party marketing, profiling, or any purpose unrelated to operating and improving Voca-Voca.</p>
 
   <h2>3. How We Store and Protect Your Data</h2>
 
   <h3>Local storage</h3>
-  <p>Your data is stored locally in your browser using Chrome's <code>chrome.storage.local</code> API. This data never leaves your device unless you sign in and enable cloud sync.</p>
+  <p>The browser extension and iOS app store your data on your device first. The browser extension uses Chrome's <code>chrome.storage.local</code> API; the iOS app uses SwiftData. Local data remains on your device for as long as the application is installed.</p>
 
   <h3>Cloud storage</h3>
-  <p>If you sign in with Google, your data is synced to <strong>Google Firebase Firestore</strong>. Firestore data is:</p>
+  <p>When you sign in, your data syncs to <strong>Google Firebase Firestore</strong>. Firestore data is:</p>
   <ul>
     <li>Encrypted in transit (TLS) and at rest (AES-256).</li>
-    <li>Stored under your unique Firebase user ID, isolated from all other users by Firestore Security Rules that enforce per-user read/write access.</li>
-    <li>Hosted on Google Cloud infrastructure. For details see <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy and Security</a>.</li>
+    <li>Stored under your unique Firebase user ID, isolated from all other users by Firestore Security Rules that enforce per-user read and write access.</li>
+    <li>Hosted on Google Cloud infrastructure. See <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy and Security</a> for Google's commitments.</li>
   </ul>
 
   <h3>Security measures</h3>
   <ul>
     <li>Firestore Security Rules prevent any user from accessing another user's data.</li>
     <li>Authentication tokens are managed by Firebase Auth and are never stored in plain text.</li>
-    <li>We do not operate our own servers or databases — all cloud infrastructure is managed by Google Firebase.</li>
-    <li>We conduct periodic reviews of our security rules and access controls.</li>
+    <li>We do not operate our own servers or databases. All cloud infrastructure is provided by Google Firebase and a small number of named third-party services listed in Section 4.</li>
+    <li>We review our security rules and access controls periodically.</li>
   </ul>
 
   <h2>4. Third-Party Services</h2>
-  <p>Voca-Voca interacts with the following third-party services. Only the minimum data required is transmitted to each.</p>
+  <p>Voca-Voca relies on the following third-party services. We transmit only the minimum data each service needs to perform its function.</p>
 
   <table>
     <tr><th>Service</th><th>Data sent</th><th>Purpose</th><th>Privacy policy</th></tr>
     <tr>
-      <td>Free Dictionary API<br><small>api.dictionaryapi.dev</small></td>
-      <td>The looked-up word only</td>
-      <td>Fetching definitions, phonetics, and examples</td>
-      <td><a href="https://dictionaryapi.dev/" target="_blank" rel="noopener">dictionaryapi.dev</a></td>
-    </tr>
-    <tr>
-      <td>Datamuse API<br><small>api.datamuse.com</small></td>
-      <td>The looked-up word only</td>
-      <td>Fetching related words and synonyms</td>
-      <td><a href="https://www.datamuse.com/api/" target="_blank" rel="noopener">datamuse.com/api</a></td>
-    </tr>
-    <tr>
-      <td>Wiktionary<br><small>en.wiktionary.org</small></td>
-      <td>The looked-up word only</td>
-      <td>Fetching additional definitions and etymology</td>
-      <td><a href="https://foundation.wikimedia.org/wiki/Privacy_policy" target="_blank" rel="noopener">Wikimedia Privacy Policy</a></td>
-    </tr>
-    <tr>
-      <td>Google Firebase<br><small>Auth + Firestore</small></td>
-      <td>Google account credentials; your vocabulary and learning data</td>
-      <td>Authentication and cloud sync</td>
+      <td><strong>Google Firebase</strong><br><small>Auth + Firestore</small></td>
+      <td>Account credentials (Apple ID or Google ID), your vocabulary, learning state, folders, preferences.</td>
+      <td>Authentication and cloud sync.</td>
       <td><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy</a></td>
     </tr>
     <tr>
-      <td>Google Translate<br><small>translate.google.com</small></td>
-      <td>The looked-up word only</td>
-      <td>Audio pronunciation playback</td>
-      <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></td>
+      <td><strong>PostHog</strong><br><small>us.i.posthog.com</small></td>
+      <td>Anonymous interaction events. No word content, no page URLs, no email or name. See Section 5 for the full event list.</td>
+      <td>Product analytics &mdash; understanding which features are used so we can prioritize improvements and fix bugs.</td>
+      <td><a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog Privacy</a></td>
     </tr>
     <tr>
-      <td>PostHog<br><small>us.i.posthog.com</small></td>
-      <td>Anonymous event names + non-identifying metadata (no personal info, no word content). See <a href="#analytics">Section 5</a> for the full list.</td>
-      <td>Understanding aggregate product usage and improving the product</td>
-      <td><a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog Privacy Policy</a></td>
+      <td><strong>RevenueCat</strong><br><small>api.revenuecat.com</small></td>
+      <td>Your Firebase user ID and the subscription state reported by Apple StoreKit or Stripe (active, expired, in trial). No card or bank details.</td>
+      <td>Reconciling your subscription so you receive Pro features on every device you sign into.</td>
+      <td><a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat Privacy</a></td>
     </tr>
     <tr>
-      <td>RevenueCat<br><small>api.revenuecat.com</small></td>
-      <td>Subscription state, transaction IDs, your Firebase user ID. No card / bank details.</td>
-      <td>Source of truth for which users are on Premium and renewal lifecycle</td>
-      <td><a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat Privacy Policy</a></td>
+      <td><strong>Apple StoreKit</strong></td>
+      <td>The purchase transaction. Payment details are handled entirely by Apple; we never see them.</td>
+      <td>Processing in-app purchases on iOS.</td>
+      <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy</a></td>
     </tr>
     <tr>
-      <td>Payment processors<br><small>(e.g., Stripe)</small></td>
-      <td>Payment details (collected directly by the processor)</td>
-      <td>Processing subscription payments</td>
-      <td><a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe Privacy Policy</a></td>
+      <td><strong>Stripe</strong><br><small>stripe.com</small></td>
+      <td>Payment details (collected directly by Stripe), your email, and your Firebase user ID.</td>
+      <td>Processing subscription payments on the web.</td>
+      <td><a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe Privacy</a></td>
+    </tr>
+    <tr>
+      <td><strong>Google Cloud Text-to-Speech</strong><br><small>texttospeech.googleapis.com</small></td>
+      <td>The single word whose audio you tapped to play. Synthesized audio is cached on our server so the same word is not re-sent on subsequent plays.</td>
+      <td>Generating natural-sounding pronunciation for Pro users in their chosen voice (American, British, Australian, or Indian English).</td>
+      <td><a href="https://cloud.google.com/terms/cloud-privacy-notice" target="_blank" rel="noopener">Google Cloud Privacy</a></td>
+    </tr>
+    <tr>
+      <td><strong>Free Dictionary API</strong><br><small>api.dictionaryapi.dev</small></td>
+      <td>The looked-up word only.</td>
+      <td>Fetching definitions, phonetics, and examples.</td>
+      <td><a href="https://dictionaryapi.dev/" target="_blank" rel="noopener">dictionaryapi.dev</a></td>
+    </tr>
+    <tr>
+      <td><strong>Datamuse API</strong><br><small>api.datamuse.com</small></td>
+      <td>The looked-up word only.</td>
+      <td>Fetching related words and synonyms.</td>
+      <td><a href="https://www.datamuse.com/api/" target="_blank" rel="noopener">datamuse.com/api</a></td>
+    </tr>
+    <tr>
+      <td><strong>Wiktionary</strong><br><small>en.wiktionary.org</small></td>
+      <td>The looked-up word only.</td>
+      <td>Fetching additional definitions and etymology.</td>
+      <td><a href="https://foundation.wikimedia.org/wiki/Privacy_policy" target="_blank" rel="noopener">Wikimedia Privacy</a></td>
+    </tr>
+    <tr>
+      <td><strong>Google Translate</strong><br><small>translate.google.com</small></td>
+      <td>The looked-up word only.</td>
+      <td>Generating audio pronunciation for free-tier users.</td>
+      <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy</a></td>
     </tr>
   </table>
 
-  <p>No other third-party services receive your data. We do not embed advertising networks or cross-site tracking scripts.</p>
+  <p>No other third-party services receive your data. We do not embed advertising networks, behavioral-targeting scripts, or social-network trackers.</p>
 
-  <h2 id="analytics">5. Analytics</h2>
-  <p>Voca-Voca uses <strong>PostHog</strong> to understand aggregate usage patterns — how many people install the extension, which features they use, where they drop off, and where they convert. We use this information to prioritize improvements and to demonstrate product traction to potential partners or investors.</p>
+  <h2>5. Product Analytics</h2>
+
+  <p>We use <strong>PostHog</strong> to collect anonymous interaction events. The purpose of this data is to operate and improve Voca-Voca: identifying which features people use, where they encounter friction, which release introduces a regression, and whether a change we shipped had the intended effect.</p>
+
+  <h3>What is collected</h3>
+  <ul>
+    <li><strong>Lifecycle events</strong>: install, update, session start, session end, uninstall.</li>
+    <li><strong>Authentication events</strong>: that a sign-in occurred and which provider was used (Apple or Google). We do not collect the email address or name in analytics events.</li>
+    <li><strong>Engagement events</strong>: word looked up, word saved, practice session started/completed, audio played, controller connected.</li>
+    <li><strong>Funnel events</strong>: free-plan limit reached, upgrade clicked, upgrade succeeded.</li>
+    <li><strong>Anonymous metadata about saved words</strong>: word length, language, part of speech, and source domain (for example, the bare hostname "nytimes.com"). We do not collect the word itself or the full URL.</li>
+    <li><strong>Device context that PostHog records automatically</strong>: device type, operating system, browser (where applicable), language, and an approximate country or region inferred from IP address.</li>
+  </ul>
+
+  <p>Events are keyed by your Firebase user ID once you sign in, and by a random anonymous identifier before sign-in. We do not link analytics data to your email address, real name, or any other personally identifying information.</p>
 
   <h3>Where analytics runs</h3>
   <ul>
-    <li><strong>This website (voca-voca.app)</strong> — loads the PostHog JavaScript SDK from <code>us.i.posthog.com</code> on page view, gated by your consent choice (see "Opt-out" below).</li>
-    <li><strong>Chrome extension</strong> — POSTs events directly to PostHog's HTTPS capture endpoint from the extension's background service worker and side panel. No third-party JavaScript is loaded inside the extension; the Chrome Web Store's Manifest V3 rules prohibit that and we comply.</li>
-    <li><strong>iOS app</strong> — uses the PostHog Swift SDK plus the RevenueCat Swift SDK for subscription state. Both run only after the app launches and stop sending events when you sign out.</li>
+    <li>The <strong>browser extension</strong> sends events from its background service worker and side panel directly to PostHog's HTTPS capture endpoint.</li>
+    <li>The <strong>iOS app</strong> uses the PostHog Swift SDK. Events stop being sent when you sign out.</li>
+    <li>The <strong>voca-voca.app marketing site</strong> uses the PostHog JavaScript SDK to count visits and measure which Chrome Web Store install links convert.</li>
   </ul>
 
-  <h3>Event categories we collect</h3>
-  <p>We collect named events describing what the user did. The exact event payloads contain only the parameters listed below — never the word content you save, never the URL of the page you were reading, never your email or name.</p>
+  <h3>Your choices</h3>
   <ul>
-    <li><strong>Lifecycle events</strong> — <code>install</code>, <code>update</code>, <code>session_start</code>, <code>extension_uninstalled</code>. Counts of installs, updates, sessions, and uninstalls.</li>
-    <li><strong>Authentication events</strong> — <code>sign_in_succeeded</code> with a <code>method</code> parameter (e.g., "google" or "apple"). Records that a sign-in occurred and which provider was used; does <strong>not</strong> include your email, name, or user ID.</li>
-    <li><strong>Engagement events</strong> — <code>word_lookup</code>, <code>word_saved</code>, <code>first_word_saved</code>, <code>milestone_10_words</code>, <code>practice_session_started</code>, <code>practice_session_completed</code>, <code>audio_played</code>, <code>gamepad_connected</code>. Each event records that the action happened. The <code>word_saved</code> event additionally records anonymous metadata: word length (an integer), language (always "en"), part of speech (e.g., "noun"), and source domain (e.g., "nytimes.com") — but <strong>never</strong> the actual word.</li>
-    <li><strong>Conversion events</strong> — <code>free_limit_reached</code>, <code>upgrade_clicked</code>, <code>upgrade_succeeded</code>. Tracks the funnel from hitting the free-plan limit to upgrading to Premium.</li>
-    <li><strong>Outbound click events</strong> — <code>cta_chrome_click</code> on this website, with a <code>link_location</code> parameter (e.g., "nav", "hero", "final_cta") to measure which page placement drives Chrome Web Store installs.</li>
+    <li>You can sign out of the iOS app or the browser extension at any time; analytics events stop transmitting until you sign back in.</li>
+    <li>You can request deletion of your analytics data by emailing <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>. We will remove your events from PostHog within thirty (30) days.</li>
+    <li>Browser-level controls such as Brave Shields, uBlock Origin, or Privacy Badger will block PostHog requests from the marketing site. The extension and iOS app will continue to function normally regardless.</li>
   </ul>
 
-  <h3>What is sent to Google</h3>
-  <p>Each event includes:</p>
+  <p>Analytics data is used solely by Voca-Voca to operate and improve the service. We do not sell it, license it, transfer it to data brokers, or combine it with information from third parties.</p>
+
+  <h2>6. Subscriptions and Payments</h2>
+
+  <p>Voca-Voca offers paid Pro subscriptions. Payment processing is handled entirely by third-party processors:</p>
   <ul>
-    <li>The event name and the parameters listed above.</li>
-    <li>An anonymous <strong>client ID</strong>: a random UUID generated on first use, stored locally on your device. The client ID is not linked to your name, email, or any other personal information. It exists so we can distinguish "1,000 visits by 1 person" from "1 visit each by 1,000 people."</li>
-    <li>Standard analytics metadata that Google receives automatically: device type, browser, language, approximate country/region (inferred from IP — see below), time of day.</li>
+    <li>On <strong>iOS</strong>, purchases go through <strong>Apple StoreKit</strong> per Apple's App Store rules.</li>
+    <li>On the <strong>web</strong>, purchases go through <strong>Stripe</strong>.</li>
   </ul>
-  <p>We have enabled IP address anonymization in our GA4 configuration. Google receives only an anonymized IP and does not store it after deriving approximate region. We have <strong>not</strong> enabled Google Signals, Audience Manager, or any cross-product Google advertising integrations; analytics data is never shared with Google's advertising products.</p>
-  <p>Data retention is set to GA4's standard (currently 14 months) before automatic deletion at the user level.</p>
 
-  <h3>Opt-out</h3>
-  <p>Analytics is governed by <strong>Google Consent Mode v2</strong>:</p>
-  <ul>
-    <li>The first time you visit voca-voca.app, all analytics consent flags default to <code>denied</code> — GA4 buffers events in memory but transmits nothing.</li>
-    <li>A small cookie banner asks whether you accept analytics cookies. The "Decline" button locks the consent flag to <code>denied</code> permanently for your browser. The "OK" button updates the flag to <code>granted</code> and only then does any analytics data leave the page.</li>
-    <li>Your choice is stored both in <code>localStorage</code> and a first-party cookie (so it survives if either storage mechanism is cleared by your browser's privacy controls). To change your decision later, clear your site data for voca-voca.app and the banner will reappear.</li>
-    <li>You can also use a browser-level opt-out such as Google's <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>, which blocks all GA4 requests at the network layer.</li>
-  </ul>
-  <p>For the Chrome extension, analytics is currently always-on (gated only by the same Google Consent Mode defaults for first-party site analytics, which the extension respects). A user-visible toggle to disable extension analytics is planned for a future release; until then, you can disable analytics by uninstalling the extension.</p>
-
-  <p>Analytics data is used solely by Voca-Voca to improve the product. We do not sell it, share it with third parties for their own use, or combine it with personal information.</p>
-
-  <h2>6. Payments</h2>
-  <p>Voca-Voca may offer paid subscription plans. All payment processing is handled by <strong>third-party payment processors</strong> (such as Stripe). When you subscribe:</p>
-  <ul>
-    <li>Your payment information (credit card number, billing address) is collected and processed <strong>directly by the payment processor</strong> — not by Voca-Voca.</li>
-    <li>Voca-Voca <strong>never</strong> sees, receives, stores, or has access to your full payment card details.</li>
-    <li>We receive only a confirmation of your subscription status (active, canceled, or expired) and an account identifier from the payment processor.</li>
-  </ul>
+  <p>In both cases, your full card details are collected and held by the processor &mdash; Voca-Voca never sees them. We receive only the information needed to know whether your subscription is active: the transaction identifier, the plan you bought, the renewal date, and whether the subscription is currently active, expired, or in a trial period. This information is mirrored to RevenueCat (Section 4) so your entitlement applies across every device you sign into.</p>
 
   <h2>7. Google API Services User Data Policy</h2>
-  <p>Voca-Voca uses Google Sign-In (via the <code>chrome.identity</code> API) to authenticate your account. Our use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. Specifically:</p>
+
+  <p>Voca-Voca uses Google Sign-In to authenticate accounts. Our use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. Specifically:</p>
   <ul>
-    <li>We only use Google user data (email, display name, user ID) to provide and improve the user-facing features of Voca-Voca — namely, sign-in and cloud sync.</li>
-    <li>We do not transfer Google user data to third parties except as necessary to provide the extension's features, with your consent, for security purposes, or to comply with applicable law.</li>
-    <li>We do not use Google user data for advertising or marketing purposes.</li>
-    <li>We do not allow humans to read your Google user data unless you provide explicit consent, it is necessary for security purposes, or it is required by law.</li>
+    <li>We use Google user data (email address, display name, user ID) only to provide and improve user-facing features &mdash; sign-in and cloud sync.</li>
+    <li>We do not transfer Google user data to third parties except as necessary to provide those features, with your consent, for security purposes, or to comply with applicable law.</li>
+    <li>We do not use Google user data for advertising.</li>
+    <li>We do not allow humans to read your Google user data unless you give explicit consent, security requires it, or the law requires it.</li>
   </ul>
 
-  <h2>8. Data Sharing</h2>
+  <h2>8. Data Sharing and Disclosure</h2>
   <ul>
-    <li>We do <strong>not</strong> sell, rent, lease, or trade your personal data to any third party.</li>
-    <li>We do <strong>not</strong> share your data with third parties for their marketing or advertising purposes.</li>
-    <li>We may disclose your data only if required to do so by law, regulation, or valid legal process (e.g., a court order or subpoena).</li>
+    <li>We do <strong>not</strong> sell, rent, lease, or trade your personal data.</li>
+    <li>We do <strong>not</strong> share personal data with third parties for their own marketing or advertising.</li>
+    <li>We do <strong>not</strong> share personal data with data brokers.</li>
+    <li>We may disclose data when required by law, regulation, or valid legal process (such as a court order or subpoena), or where necessary to protect the rights, property, or safety of Voca-Voca, our users, or the public.</li>
+    <li>If Voca-Voca is involved in a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction. We will notify you and provide an opportunity to delete your data before the transfer takes effect.</li>
   </ul>
 
   <h2>9. Data Retention</h2>
   <ul>
-    <li><strong>Local data</strong> is retained on your device for as long as the extension is installed. Uninstalling the extension removes all local data.</li>
-    <li><strong>Cloud data</strong> is retained for as long as your account is active. You can delete individual words, your entire collection, or all cloud data at any time (see Section 10).</li>
-    <li><strong>Soft-deleted items</strong> (words you delete) are marked as deleted and removed from all devices within 30 days.</li>
-    <li>If you do not use Voca-Voca for 24 months, we may delete your cloud data after sending a notification to your registered email address.</li>
+    <li><strong>Local data</strong> stays on your device for as long as the application is installed. Uninstalling removes all local data.</li>
+    <li><strong>Cloud data</strong> is retained for as long as your account is active. You may delete individual words, your entire collection, or your account at any time (see Section 10).</li>
+    <li><strong>Soft-deleted items</strong> (for example, a word you deleted) remain in our system for up to thirty (30) days for sync reconciliation, after which they are removed from all devices.</li>
+    <li><strong>Analytics events</strong> are retained for up to twelve (12) months in PostHog before automatic deletion.</li>
+    <li><strong>Inactive accounts</strong>: If you do not use Voca-Voca for twenty-four (24) months, we may delete your cloud data after sending a notification to your registered email address.</li>
   </ul>
 
   <h2>10. Your Rights and Choices</h2>
-  <p>Regardless of where you live, you have the following rights over your <strong>personal data</strong> (account information such as your email and display name):</p>
-  <ul>
-    <li><strong>Access</strong> — You can view your personal data directly within the extension.</li>
-    <li><strong>Correction</strong> — You can update your personal information at any time.</li>
-    <li><strong>Deletion</strong> — You can request deletion of your personal data and account by contacting us.</li>
-    <li><strong>Withdraw consent</strong> — You can sign out of cloud sync at any time and use the extension in local-only mode.</li>
-  </ul>
-  <p><strong>Vocabulary content and service data.</strong> Your vocabulary collection — including definitions, learning progress, and practice statistics — is content generated through and managed by the Voca-Voca service. Access to this content, including any export or portability features, is governed by your service plan and our <a href="terms-of-service.html">Terms of Service</a>. Certain features, such as bulk export, cloud sync, and advanced practice modes, may be available only to subscribers.</p>
 
-  <h3>For users in the European Economic Area (GDPR)</h3>
-  <p>If you are located in the EEA, our legal basis for processing your personal data is:</p>
+  <p>You have the following rights over your personal data, regardless of where you live:</p>
   <ul>
-    <li><strong>Consent</strong> — You choose to sign in and enable cloud sync. You may withdraw consent at any time by signing out.</li>
-    <li><strong>Legitimate interest</strong> — Providing and improving the core vocabulary-learning features you expect from the extension.</li>
-    <li><strong>Contract</strong> — Performing the service you signed up for (storing and syncing your vocabulary).</li>
+    <li><strong>Access</strong> &mdash; You can view your personal data in the application or request a copy by email.</li>
+    <li><strong>Correction</strong> &mdash; You can update your personal information at any time.</li>
+    <li><strong>Deletion</strong> &mdash; You can delete your account directly in the application (Settings &rarr; Account &rarr; Delete Account). The application requires you to type "DELETE" to confirm. Deletion permanently removes your Firebase Auth account, your Firestore data, and your analytics events within thirty (30) days. Email <a href="mailto:support@voca-voca.app">support@voca-voca.app</a> if you prefer a manual request.</li>
+    <li><strong>Withdraw consent</strong> &mdash; You can sign out of cloud sync at any time and continue using the extension or app in local-only mode.</li>
+    <li><strong>Portability</strong> &mdash; You can export your vocabulary at any time using the in-app export feature (CSV, Anki, or backup file). Pro users have access to additional export formats.</li>
   </ul>
-  <p>Under GDPR Article 20, you have the right to receive the personal data you <em>provided</em> to us (such as your email and display name) in a portable format. Vocabulary content enriched or generated by the service (definitions, spaced-repetition state, practice statistics) is derived data produced through the service's functionality and is not subject to data portability obligations. Access to service-generated content is governed by your service plan and our <a href="terms-of-service.html">Terms of Service</a>.</p>
-  <p>You also have the right to lodge a complaint with your local data protection authority. To exercise any of these rights, contact us at <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>.</p>
 
-  <h3>For users in California (CCPA)</h3>
+  <h3>For users in the European Economic Area, United Kingdom, and Switzerland (GDPR / UK GDPR)</h3>
+  <p>If you are located in the EEA, the UK, or Switzerland, the lawful bases under Article 6 GDPR on which we rely are:</p>
+  <ul>
+    <li><strong>Performance of a contract</strong> (Art. 6(1)(b)) &mdash; storing and synchronizing the vocabulary collection you signed up for; managing your subscription.</li>
+    <li><strong>Legitimate interests</strong> (Art. 6(1)(f)) &mdash; operating and improving the service, securing the platform, and analyzing aggregate usage. We have weighed these interests against your privacy rights and concluded that the processing is necessary and proportionate.</li>
+    <li><strong>Consent</strong> (Art. 6(1)(a)) &mdash; for any optional processing that requires it, such as marketing email (which we do not currently send).</li>
+    <li><strong>Compliance with legal obligations</strong> (Art. 6(1)(c)) &mdash; responding to lawful requests from public authorities.</li>
+  </ul>
+  <p>Under Articles 15&ndash;22 GDPR you have the right to access, rectify, erase, restrict, and object to the processing of your personal data, and the right to data portability. You also have the right to lodge a complaint with your local supervisory authority. To exercise any of these rights, contact <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>; we respond within thirty (30) days.</p>
+
+  <h3>For users in California (CCPA / CPRA)</h3>
   <p>If you are a California resident, you have the right to:</p>
   <ul>
-    <li>Know what personal information we collect and how we use it (described in this policy).</li>
+    <li>Know what categories of personal information we collect, the purposes for which we collect it, and the third parties to whom we disclose it &mdash; all of which are described in this policy.</li>
+    <li>Request a copy of your personal information.</li>
     <li>Request deletion of your personal information.</li>
-    <li>Not be discriminated against for exercising your privacy rights.</li>
+    <li>Correct inaccurate personal information.</li>
+    <li>Opt out of any "sale" or "sharing" of personal information. We do not sell or share personal information for cross-context behavioral advertising.</li>
+    <li>Not be discriminated against for exercising any of these rights.</li>
   </ul>
-  <p>We do not sell personal information. We do not share personal information for cross-context behavioral advertising. To submit a request, contact <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>.</p>
+  <p>To submit a request, contact <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>. We may need to verify your identity before fulfilling the request.</p>
+
+  <h3>For users in other jurisdictions</h3>
+  <p>If your local law grants additional privacy rights (for example, Brazil's LGPD, Canada's PIPEDA, or Australia's Privacy Act), you may exercise those rights by contacting <a href="mailto:support@voca-voca.app">support@voca-voca.app</a>.</p>
 
   <h2>11. Browser Permissions</h2>
-  <p>Voca-Voca requests the following browser permissions. Each is used solely for the purpose described:</p>
+  <p>Voca-Voca's browser extension requests the following permissions:</p>
   <table>
-    <tr><th>Permission</th><th>Why it's needed</th></tr>
-    <tr>
-      <td><code>activeTab</code></td>
-      <td>To read the word you select (highlight) on the current page so we can look up its definition. We do not access any other page content.</td>
-    </tr>
-    <tr>
-      <td><code>storage</code></td>
-      <td>To save your vocabulary, learning progress, and preferences locally in the browser.</td>
-    </tr>
-    <tr>
-      <td><code>sidePanel</code></td>
-      <td>To display the extension's interface (definitions, collection, practice) in Chrome's side panel.</td>
-    </tr>
-    <tr>
-      <td><code>contextMenus</code></td>
-      <td>To add a "Look up word" option when you right-click on selected text.</td>
-    </tr>
-    <tr>
-      <td><code>identity</code></td>
-      <td>To enable Google Sign-In for cloud sync across devices.</td>
-    </tr>
-    <tr>
-      <td>Content script<br>(<code>&lt;all_urls&gt;</code>)</td>
-      <td>To detect when you select text on any webpage and show a small lookup button. The script only reads the selected text — no other page content is collected, stored, or transmitted.</td>
-    </tr>
+    <tr><th>Permission</th><th>Why it is needed</th></tr>
+    <tr><td><code>activeTab</code></td><td>To read the word you select on the current page so it can be looked up. No other page content is accessed.</td></tr>
+    <tr><td><code>storage</code></td><td>To save your vocabulary, learning progress, and preferences locally in the browser.</td></tr>
+    <tr><td><code>sidePanel</code></td><td>To display the extension's interface in the browser's side panel.</td></tr>
+    <tr><td><code>contextMenus</code></td><td>To add a "Look up word" option to the right-click menu.</td></tr>
+    <tr><td><code>identity</code></td><td>To enable Sign-in with Apple and Google for cloud sync.</td></tr>
+    <tr><td>Content script (<code>&lt;all_urls&gt;</code>)</td><td>To detect text selections on any web page and offer a lookup. The content script reads only the text you actively select; it does not transmit page content.</td></tr>
   </table>
 
   <h2>12. Children's Privacy</h2>
-  <p>Voca-Voca is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:support@voca-voca.app">support@voca-voca.app</a> and we will promptly delete it.</p>
+  <p>Voca-Voca is not directed at children. We do not knowingly collect personal information from anyone under the age of 16 in the European Economic Area, the United Kingdom, or Switzerland, or under the age of 13 in the United States and other jurisdictions. If you are a parent or guardian and believe your child has provided us with personal data, please contact <a href="mailto:support@voca-voca.app">support@voca-voca.app</a> and we will delete the information promptly.</p>
 
   <h2>13. International Data Transfers</h2>
-  <p>If you use Voca-Voca outside the United States, your data may be transferred to and processed in the United States or other countries where Google operates its Firebase infrastructure. Google maintains appropriate safeguards for international data transfers as described in their <a href="https://cloud.google.com/terms/data-processing-addendum" target="_blank" rel="noopener">Data Processing and Security Terms</a>.</p>
+  <p>Voca-Voca operates from the United States, and our cloud infrastructure (Google Firebase, PostHog, RevenueCat) is hosted on servers in the United States and other countries. If you use Voca-Voca from outside the United States, your data is transferred to and processed in the United States. Where required by law, the third-party providers listed in Section 4 maintain Standard Contractual Clauses or equivalent safeguards for international data transfers; their privacy policies describe the specific mechanisms.</p>
 
   <h2>14. Changes to This Policy</h2>
   <p>We may update this Privacy Policy from time to time. When we make material changes, we will:</p>
   <ul>
     <li>Update the "Last updated" date at the top of this page.</li>
-    <li>Notify you through the extension (e.g., a notification or in-app message).</li>
+    <li>Notify you through the application (for example, an in-app banner) and, for material changes, by email to the address on file.</li>
+    <li>Where local law requires it, obtain renewed consent before the change takes effect.</li>
   </ul>
-  <p>Your continued use of Voca-Voca after changes are posted constitutes your acceptance of the updated policy.</p>
+  <p>Your continued use of Voca-Voca after a change takes effect indicates that you have accepted the updated policy.</p>
 
   <h2>15. Contact</h2>
   <p>If you have questions, concerns, or requests regarding this Privacy Policy or your personal data, contact us at:</p>
   <p><strong>Email:</strong> <a href="mailto:support@voca-voca.app">support@voca-voca.app</a></p>
-  <p>We aim to respond to all requests within 30 days.</p>
+  <p>We aim to respond within thirty (30) days.</p>
 </body>
 </html>
